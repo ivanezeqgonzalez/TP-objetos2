@@ -30,7 +30,8 @@ class PublicacionTest {
 
 	@Test
 	void testCreacion() {
-		this.publicacion = new Publicacion(mockInmueble, mockUsuario, 1200f);	
+		this.publicacion = new Publicacion(mockInmueble, mockUsuario, 1200f);
+		
 	}
 
 }
