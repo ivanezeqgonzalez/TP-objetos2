@@ -3,15 +3,15 @@ package inmueble;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import iRanking.Rankeable;
 import servicio.Servicio;
+import usuario.Usuario;
 
 public class Inmueble implements Rankeable {
 	
-	private String tipo;
-	private String descripcion;
+	private TipoInmueble tipo;
 	private int cantHuespedes;
+	private String pais, ciudad, direccion;
 	
 	private int ranking;
 	
@@ -19,11 +19,16 @@ public class Inmueble implements Rankeable {
 	
 	private List<Comentario> comentarios;
 	
-	public Inmueble(String tipo, String descripcion, int cantHuespedes) {
+	private Usuario dueño;
+	
+	public Inmueble(TipoInmueble tipo, String pais, String ciudad, String direccion, int cantHuespedes, Usuario dueño) {
 		super();
 		this.tipo = tipo;
-		this.descripcion = descripcion;
+		this.pais = pais;
+		this.ciudad = ciudad;
+		this.direccion = direccion;
 		this.cantHuespedes = cantHuespedes;
+		this.dueño = dueño;
 		
 		this.servicios = new ArrayList<Servicio>();
 	}
@@ -32,17 +37,33 @@ public class Inmueble implements Rankeable {
 		this.servicios.add(servicio);
 		
 	}
+	
+	public String getPais() {
+		return pais;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+		
+	public Usuario getDueño() {
+		return dueño;
+	}
 		
 	public List<Servicio> getServicios() {
 		return servicios;
 	}
 
 	public String getTipo() {
-		return tipo;
+		return tipo.getNombre();
 	}
 
 	public String getDescripcion() {
-		return descripcion;
+		return tipo.getDescripcion();
 	}
 
 	public int getCantHuespedes() {
@@ -67,6 +88,13 @@ public class Inmueble implements Rankeable {
 	public List<Comentario> getComentarios() {
 		return comentarios;
 	}
+
+	@Override
+	public void rankear(Rankeable inmueble, int i) {
+		//NOP		
+	}
+
+	
 
 		
 

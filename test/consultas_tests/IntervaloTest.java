@@ -57,7 +57,7 @@ class IntervaloTest {
 		this.fechaFin2 = formatter.parseDateTime("30-01-2020");
 		
 		//asserting
-		assertFalse(Fechas.verificar(fechaInicio1, fechaFin1, fechaInicio2, fechaFin2));
+		assertFalse(Fechas.verificar(fechaInicio1, fechaFin1, fechaInicio2, fechaFin2)); 
 		
 	}
 

@@ -48,6 +48,13 @@ public class Usuario implements Rankeable{
 		// TODO Auto-generated method stub
 		return ranking;
 	}
+
+	@Override
+	public void rankear(Rankeable rankeable, int rank) {
+		// TODO Auto-generated method stub
+		rankeable.rankearse(rank);
+		
+	}
 	
 	
 }

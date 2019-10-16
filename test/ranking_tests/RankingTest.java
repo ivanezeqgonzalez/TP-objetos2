@@ -25,8 +25,9 @@ class RankingTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		this.usuario = new Usuario ("Angelo Padron", "padron891@gmail.com", "42745404");
-		this.inmueble = new Inmueble ("Casa", "Descripcion", 6); //tipo; desc; cant huespedes
+		this.usuario = new Usuario ("nombre_usuario1", "email_usuario1", "tel_usuario1");
+		this.inmueble = new Inmueble (null, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 0, null); //tipo; desc; cant huespedes; dueño 
+
 		
 	}
 
@@ -44,5 +45,15 @@ class RankingTest {
 		this.inmueble.rankearse(5);
 		assertEquals(5, this.inmueble.getRanking());
 	}
+	
+	@Test
+	void testRankearObjeto() {
+		//excercice
+		this.usuario.rankear(this.inmueble, 8);
+		//asserting
+		assertEquals(8, this.inmueble.getRanking());
+	}
+	
+	
 
 }
