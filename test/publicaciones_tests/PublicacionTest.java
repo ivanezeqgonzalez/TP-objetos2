@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import inmueble.Inmueble;
-import inmueble.TipoInmueble;
-import usuario.Dueño;
+import usuario.Usuario;
 
 import static org.mockito.Mockito.*;
  
@@ -16,19 +15,16 @@ class PublicacionTest {
 
 	private Publicacion publicacion;
 	private Inmueble mockInmueble;
-	private TipoInmueble mockTipoInmueble;
-	private Dueño mockDueño;
-	
+	private Usuario mockUsuario;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		//setup
-		this.mockDueño = mock(Dueño.class);
+		this.mockUsuario = mock(Usuario.class);
 		this.mockInmueble = mock (Inmueble.class);
-		this.mockTipoInmueble = mock(TipoInmueble.class);
 		
 		//config
-		when(mockInmueble.getTipo()).
+		
 		
 	}
 
