@@ -1,6 +1,7 @@
 package usuario;
 
-import iRanking.Rankeable;
+import interfaces.Rankeable;
+import interfaces.Visualizable;
 
 /**
  * 
@@ -10,7 +11,7 @@ import iRanking.Rankeable;
  * @author Angelo Padron
  *
  */
-public class Usuario implements Rankeable{
+public class Usuario implements Rankeable, Visualizable{
 
 	protected String nombreCompleto;
 	protected String eMail;
@@ -22,6 +23,7 @@ public class Usuario implements Rankeable{
 		this.nombreCompleto = nombreCompleto;
 		this.eMail = eMail;
 		this.telefono = telefono;
+		this.ranking = 0;
 	}
 
 	public String getNombreCompleto() {
@@ -53,6 +55,19 @@ public class Usuario implements Rankeable{
 	public void rankear(Rankeable rankeable, int rank) {
 		// TODO Auto-generated method stub
 		rankeable.rankearse(rank);
+		
+	}
+
+	@Override
+	public void visualizarDatos() {
+		//experimental
+		
+		System.out.println("Nombre de usuario: " + this.nombreCompleto);
+		System.out.println("Telefono contacto: " + this.telefono);
+		System.out.println("eMail: " + this.eMail);
+		System.out.println("Ranking en sitio: " + this.ranking);
+		
+
 		
 	}
 	

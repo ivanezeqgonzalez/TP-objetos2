@@ -1,4 +1,4 @@
-package iRanking;
+package interfaces;
 
 public interface Rankeable {
 	

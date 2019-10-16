@@ -3,11 +3,12 @@ package inmueble;
 import java.util.ArrayList;
 import java.util.List;
 
-import iRanking.Rankeable;
+import interfaces.Rankeable;
+import interfaces.Visualizable;
 import servicio.Servicio;
 import usuario.Usuario;
 
-public class Inmueble implements Rankeable {
+public class Inmueble implements Rankeable, Visualizable {
 	
 	private TipoInmueble tipo;
 	private int cantHuespedes;
@@ -70,16 +71,8 @@ public class Inmueble implements Rankeable {
 		return cantHuespedes;
 	}
 
-	@Override
-	public void rankearse(int puntaje) {
-		this.ranking = puntaje;
-		
-	}
-
-	@Override
-	public int getRanking() {
-		return this.ranking;
-	}
+	
+	
 
 	public void agregarComentario(Comentario comentario) {
 		this.comentarios.add(comentario);
@@ -89,9 +82,32 @@ public class Inmueble implements Rankeable {
 		return comentarios;
 	}
 
+	//interfaces
+	
+	@Override
+	public int getRanking() {
+		return this.ranking;
+	}
+	
 	@Override
 	public void rankear(Rankeable inmueble, int i) {
 		//NOP		
+	}
+
+	@Override
+	public void visualizarDatos() {
+		//experimental
+		
+		System.out.println("Tipo de inmueble: " + this.tipo.getNombre());
+		System.out.println(this.tipo.getDescripcion());
+		
+		
+	}
+	
+	@Override
+	public void rankearse(int puntaje) {
+		this.ranking = puntaje;
+		
 	}
 
 	

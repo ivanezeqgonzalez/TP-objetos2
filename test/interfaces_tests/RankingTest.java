@@ -1,15 +1,15 @@
 /**
  * 
  */
-package ranking_tests;
+package interfaces_tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import iRanking.Rankeable;
 import inmueble.Inmueble;
+import interfaces.Rankeable;
 import usuario.Usuario;
 
 
