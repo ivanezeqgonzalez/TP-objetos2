@@ -12,7 +12,7 @@ public class Propietario extends Usuario implements ObservablePropietario {
 	
 	
 	public Propietario(String nombreCompleto, String eMail, String telefono, HandlerReserva hr) {
-		super();
+		super(nombreCompleto, eMail, telefono);
 		this.nombreCompleto = nombreCompleto;
 		this.eMail= eMail;
 		this.telefeno= telefono;

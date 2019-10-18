@@ -29,13 +29,15 @@ class ConcretarReservaTest {
 	private LocalDate checkin;
 	private LocalDate checkout;
 	private HandlerReserva handlerReserva;
-	
+	private TipoInmueble mockTipoInmueble;
 	@BeforeEach
+	
 	void setUp() throws Exception {
+		mockTipoInmueble = mock(TipoInmueble.class);
 		handlerReserva = new HandlerReserva();
 		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
 		unPropietario = new Propietario("Roman", "email", "155", handlerReserva);
-		unInmueble = new Inmueble(unPropietario);
+		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
 		unaPublicacion = new Publicacion(unInmueble, LocalDate.of(2019,11,01), LocalDate.of(2019,12,25), 250.f);
 		
 		this.checkin = LocalDate.of(2019,11,03);

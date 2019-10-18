@@ -5,11 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import borrar.Comentario;
-import borrar.TipoInmueble;
-import servicio.Servicio;
-import usuario.Usuario;
-
 import static org.mockito.Mockito.*;
 
 
@@ -25,13 +20,13 @@ class InmuebleTest {
 	private Comentario mockComentario1 = mock (Comentario.class);
 	private Comentario mockComentario2 = mock (Comentario.class);
 	
-	private Usuario mockUsuario = mock (Usuario.class);
+	private Propietario mockPropietario = mock (Propietario.class);
 	
 	private TipoInmueble mockTipoInmueble = mock (TipoInmueble.class);
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.inmueble = new Inmueble (mockTipoInmueble, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 6, mockUsuario); //Tipo; Cantidad de huespedes; dueño
+		this.inmueble = new Inmueble (mockTipoInmueble, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 6, mockPropietario); //Tipo; Cantidad de huespedes; dueño
 		
 	}
 
@@ -89,7 +84,7 @@ class InmuebleTest {
 	@Test
 	void testMockDueño() {
 		//config
-		when(mockUsuario.getNombreCompleto()).thenReturn("nombre_usuario1");
+		when(mockPropietario.getNombreCompleto()).thenReturn("nombre_usuario1");
 		
 		//asserting
 		assertEquals("nombre_usuario1", this.inmueble.getDueño().getNombreCompleto());
