@@ -1,7 +1,7 @@
 package model;
 import java.util.*;
 
-public class Propietario implements ObservablePropietario{
+public class Propietario extends Usuario implements ObservablePropietario {
 
 	private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
 	private String nombreCompleto;
@@ -12,6 +12,7 @@ public class Propietario implements ObservablePropietario{
 	
 	
 	public Propietario(String nombreCompleto, String eMail, String telefono, HandlerReserva hr) {
+		super();
 		this.nombreCompleto = nombreCompleto;
 		this.eMail= eMail;
 		this.telefeno= telefono;
