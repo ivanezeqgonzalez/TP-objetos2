@@ -17,9 +17,6 @@ class ReservaTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-
-		//this.unInquilino = mock(Inquilino.class);
-		//this.unInmueble = mock(Inmueble.class);
 		this.unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
 		this.unPropietario = new Propietario("Roman", "email", "155", new HandlerReserva());
 		unInmueble = new Inmueble(this.unPropietario);

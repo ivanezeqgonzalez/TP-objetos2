@@ -31,4 +31,8 @@ public class Reserva {
 	public LocalDate getCheckout() {
 		return this.checkout;
 	}
+
+	public Propietario getDueño() {
+		return this.inmueble.getDueño();
+	}
 }
