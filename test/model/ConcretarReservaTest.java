@@ -34,11 +34,12 @@ class ConcretarReservaTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		handlerReserva = new HandlerReserva();
 		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
-		unPropietario = new Propietario("Roman", "email", "155");
+		unPropietario = new Propietario("Roman", "email", "155", handlerReserva);
 		unInmueble = new Inmueble(unPropietario);
 		unaPublicacion = new Publicacion(unInmueble, LocalDate.of(2019,11,01), LocalDate.of(2019,12,25), 250.f);
-		handlerReserva = new HandlerReserva();
+		
 		this.checkin = LocalDate.of(2019,11,03);
 		this.checkout = LocalDate.of(2019,11,07);
 	}
@@ -60,7 +61,7 @@ class ConcretarReservaTest {
 		System.out.println("reserva solicitadas" + unPropietario.getReservasSolicitadas().size());
 		
 		List<Reserva> lista = unPropietario.getReservasSolicitadas();
-		lista.forEach(r -> unPropietario.aceptarReserva(r));
+		unPropietario.aceptarReserva(lista.get(0));
 		
 		/*for(Reserva r : lista){
 			unPropietario.aceptarReserva(r);

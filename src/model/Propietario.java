@@ -8,12 +8,15 @@ public class Propietario implements ObservablePropietario{
 	private String eMail;
 	private String telefeno;
 	private ArrayList<Reserva> reservasSolicitadas = new ArrayList<Reserva>();
-	private ArrayList<NotificacionReserva> observers = new ArrayList<NotificacionReserva>();
+	//private ArrayList<NotificacionReserva> observers = new ArrayList<NotificacionReserva>();
+	private HandlerReserva handlerReserva;
 	
-	public Propietario(String nombreCompleto, String eMail, String telefono) {
+	
+	public Propietario(String nombreCompleto, String eMail, String telefono, HandlerReserva hr) {
 		this.nombreCompleto = nombreCompleto;
 		this.eMail= eMail;
 		this.telefeno= telefono;
+		this.handlerReserva = hr;
 	}
 
 	public void agregarInmueble (Inmueble inmueble) {
@@ -26,13 +29,15 @@ public class Propietario implements ObservablePropietario{
 	
 	public void aceptarReserva(Reserva reserva) {
 		System.out.println("Aceptando reserva");
-		observers.forEach(mt -> mt.notificarReservaAceptada(reserva));
+		//observers.forEach(mt -> mt.notificarReservaAceptada(reserva));
 		
 		/*for(NotificacionReserva nt : observers) {
 			nt.notificarReservaAceptada(reserva);
 			System.out.println("Despues de nt");
 		}*/
-		this.removerSolicitudReserva(reserva);
+		//NO DEBERIA TENER PROBLEMA
+		//this.removerSolicitudReserva(reserva);
+		this.handlerReserva.registrarReserva(reserva);
 		
 	}
 
@@ -50,7 +55,7 @@ public class Propietario implements ObservablePropietario{
 		this.reservasSolicitadas.remove(reserva);
 	}
 
-	public void addObserver(NotificacionReserva notificacionReserva) {
+	/*public void addObserver(NotificacionReserva notificacionReserva) {
 		this.observers.add(notificacionReserva);
 		
 	}
@@ -58,7 +63,7 @@ public class Propietario implements ObservablePropietario{
 	public void removeObserver(NotificacionReserva notificacionReserva) {
 		this.observers.remove(notificacionReserva);
 		
-	}
+	}*/
 
 }
 
