@@ -27,8 +27,8 @@ public class NotificacionReserva implements ObservableNotificar, ObserverNotific
 	public void notificarReservaSolicitada() {
 		// Observer=> Dueño
 		// Observable=> this
-		this.dueño.recibirSolicitudReserva(this.reserva);
-		this.dueño.addObserver(this);
+		this.dueño.recibirSolicitudReserva(this.reserva); 
+		//this.dueño.addObserver(this);
 		
 	}
 

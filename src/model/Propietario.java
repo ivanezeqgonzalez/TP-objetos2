@@ -8,7 +8,6 @@ public class Propietario implements ObservablePropietario{
 	private String eMail;
 	private String telefeno;
 	private ArrayList<Reserva> reservasSolicitadas = new ArrayList<Reserva>();
-	//private ArrayList<NotificacionReserva> observers = new ArrayList<NotificacionReserva>();
 	private HandlerReserva handlerReserva;
 	
 	
@@ -28,21 +27,11 @@ public class Propietario implements ObservablePropietario{
 	}
 	
 	public void aceptarReserva(Reserva reserva) {
-		System.out.println("Aceptando reserva");
-		//observers.forEach(mt -> mt.notificarReservaAceptada(reserva));
-		
-		/*for(NotificacionReserva nt : observers) {
-			nt.notificarReservaAceptada(reserva);
-			System.out.println("Despues de nt");
-		}*/
-		//NO DEBERIA TENER PROBLEMA
-		//this.removerSolicitudReserva(reserva);
 		this.handlerReserva.registrarReserva(reserva);
 		
 	}
 
 	public ArrayList<Reserva> getReservasSolicitadas() {
-		System.out.println("get reservas solicitadas"+ reservasSolicitadas.size());
 		return this.reservasSolicitadas;
 	}
 
@@ -54,17 +43,6 @@ public class Propietario implements ObservablePropietario{
 	public void removerSolicitudReserva(Reserva reserva) {
 		this.reservasSolicitadas.remove(reserva);
 	}
-
-	/*public void addObserver(NotificacionReserva notificacionReserva) {
-		this.observers.add(notificacionReserva);
-		
-	}
-	
-	public void removeObserver(NotificacionReserva notificacionReserva) {
-		this.observers.remove(notificacionReserva);
-		
-	}*/
-
 }
 
 

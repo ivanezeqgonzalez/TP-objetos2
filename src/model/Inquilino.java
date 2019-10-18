@@ -24,8 +24,6 @@ public class Inquilino implements ObserverInquilino {
 	@Override
 	public void agregarReservaAceptada(Reserva reserva) {
 		this.reservasAceptadas.add(reserva);
-		System.out.println("Agegando Reserva en inquilino");
-		System.out.println("Reserva inquilino: "+ this.reservasAceptadas.size());
 	}
 
 }

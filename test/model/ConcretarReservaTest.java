@@ -25,9 +25,7 @@ class ConcretarReservaTest {
 	private Publicacion unaPublicacion;
 	private Inmueble unInmueble;
 	private Inquilino unInquilino;
-	//private Reserva reserva;
 	private Propietario unPropietario;
-	//private NotificacionReserva notificacionReserva;
 	private LocalDate checkin;
 	private LocalDate checkout;
 	private HandlerReserva handlerReserva;
@@ -58,15 +56,10 @@ class ConcretarReservaTest {
 		 * Fase2:
 		 * El dueño acepta la reserva
 		 */
-		System.out.println("reserva solicitadas" + unPropietario.getReservasSolicitadas().size());
 		
 		List<Reserva> lista = unPropietario.getReservasSolicitadas();
 		unPropietario.aceptarReserva(lista.get(0));
 		
-		/*for(Reserva r : lista){
-			unPropietario.aceptarReserva(r);
-		}
-				*/
 		assertTrue(unInquilino.getReservas().size() == 1);
 		
 	}
