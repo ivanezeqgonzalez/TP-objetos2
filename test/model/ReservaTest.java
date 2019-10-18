@@ -21,7 +21,7 @@ class ReservaTest {
 		//this.unInquilino = mock(Inquilino.class);
 		//this.unInmueble = mock(Inmueble.class);
 		this.unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
-		this.unPropietario = new Propietario("Roman", "email", "155");
+		this.unPropietario = new Propietario("Roman", "email", "155", new HandlerReserva());
 		unInmueble = new Inmueble(this.unPropietario);
 		this.checkin = LocalDate.of(2019, 11, 03);
 		this.checkout = LocalDate.of(2019, 11, 07);
