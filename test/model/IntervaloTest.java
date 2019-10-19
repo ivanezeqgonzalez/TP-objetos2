@@ -9,29 +9,16 @@ import org.joda.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import consultas.Fechas;
-
 class IntervaloTest {
-	
-	/*
-	 * TDD para analisis de intervalos de fechas
-	 * 
-	 */
-
 	private DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy");	
-	
 	private DateTime fechaInicio1;
 	private DateTime fechaFin1;
-	
 	private DateTime fechaInicio2;
 	private DateTime fechaFin2;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		//setup
-		
-				
 	}
 
 	@Test

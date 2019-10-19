@@ -78,15 +78,6 @@ public class Inmueble implements Rankeable {
 
 	@Override
 	public void rankear(Rankeable inmueble, int i) {
-		// NOP
-	}
-
-	@Override
-	public void visualizarDatos() {
-		// experimental
-
-		System.out.println("Tipo de inmueble: " + this.tipo.getNombre());
-		System.out.println(this.tipo.getDescripcion());
 
 	}
 

@@ -8,14 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import interfaces.Rankeable;
-import usuario.Usuario;
-
-
-/**
- * @author Angelo Padron
- *
- */
 class RankingTest {
 
 	private Rankeable usuario;
@@ -23,11 +15,8 @@ class RankingTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
 		this.usuario = new Usuario ("nombre_usuario1", "email_usuario1", "tel_usuario1");
 		this.inmueble = new Inmueble (null, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 0, null); //tipo; desc; cant huespedes; dueño 
-
-		
 	}
 
 	@Test
@@ -52,7 +41,4 @@ class RankingTest {
 		//asserting
 		assertEquals(8, this.inmueble.getRanking());
 	}
-	
-	
-
 }
