@@ -46,19 +46,5 @@ public class Usuario implements Rankeable{
 		rankeable.rankearse(rank);
 		
 	}
-
-	@Override
-	public void visualizarDatos() {
-		//experimental
-		
-		System.out.println("Nombre de usuario: " + this.nombreCompleto);
-		System.out.println("Telefono contacto: " + this.telefono);
-		System.out.println("eMail: " + this.eMail);
-		System.out.println("Ranking en sitio: " + this.ranking);
-		
-
-		
-	}
-	
 	
 }
