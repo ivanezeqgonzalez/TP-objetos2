@@ -18,7 +18,4 @@ public class TipoInmueble {
 	public String getDescripcion() {
 		return descripcion;
 	}
-	
-	
-	
 }

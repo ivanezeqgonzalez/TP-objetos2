@@ -36,7 +36,6 @@ public class Propietario extends Usuario implements ObservablePropietario {
 		return this.reservasSolicitadas;
 	}
 
-
 	public void recibirSolicitudReserva(Reserva reserva) {
 		this.reservasSolicitadas.add(reserva);
 	}

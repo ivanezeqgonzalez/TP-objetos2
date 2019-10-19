@@ -78,7 +78,7 @@ public class Inmueble implements Rankeable {
 
 	@Override
 	public void rankear(Rankeable inmueble, int i) {
-		// NOP
+
 	}
 
 	@Override
