@@ -3,18 +3,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import usuario.Usuario;
-
-/*
- * Usuario es la superclase cuyas subclases seran inquilino, dueño y (posiblemente) administrador.
- * En este test de unidad se hace el TDD para la clase mencionada. 
- */
-
 class UsuarioTest {
 
 	private Usuario usuario;
 	
-	//test basico creacion
 	@Test
 	void testCreacion() {
 		this.usuario = new Usuario ("Angelo Padron", "padron891@gmail.com", "42745404");
