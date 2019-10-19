@@ -14,12 +14,14 @@ class ReservaTest {
 	private Reserva reserva;
 	private LocalDate checkin;
 	private LocalDate checkout;
+	private TipoInmueble mockTipoInmueble;
 
 	@BeforeEach
 	void setUp() throws Exception {
+		mockTipoInmueble = mock(TipoInmueble.class);
 		this.unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
 		this.unPropietario = new Propietario("Roman", "email", "155", new HandlerReserva());
-		unInmueble = new Inmueble(this.unPropietario);
+		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
 		this.checkin = LocalDate.of(2019, 11, 03);
 		this.checkout = LocalDate.of(2019, 11, 07);
 		this.reserva = new Reserva(this.unInquilino, this.unInmueble, this.checkin, this.checkout);
