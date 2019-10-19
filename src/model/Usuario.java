@@ -1,14 +1,6 @@
 package model;
 
-/**
- * 
- */
-
-/**
- * @author Angelo Padron
- *
- */
-public class Usuario implements Rankeable, Visualizable{
+public class Usuario implements Rankeable{
 
 	protected String nombreCompleto;
 	protected String eMail;

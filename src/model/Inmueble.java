@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inmueble implements Rankeable, Visualizable {
+public class Inmueble implements Rankeable {
 	private TipoInmueble tipo;
 	private int cantHuespedes;
 	private String pais, ciudad, direccion;

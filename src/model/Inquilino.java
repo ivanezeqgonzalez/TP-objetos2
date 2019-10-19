@@ -2,12 +2,9 @@ package model;
 
 import java.util.*;
 
-public class Inquilino implements ObserverInquilino {
+public class Inquilino extends Usuario implements ObserverInquilino {
 
 	private ArrayList<Reserva> reservasAceptadas = new ArrayList<Reserva>();
-	protected String nombreCompleto;
-	protected String eMail;
-	protected String telefono;
 	protected int ranking;
 
 	public ArrayList<Reserva> getReservas() {
@@ -15,9 +12,7 @@ public class Inquilino implements ObserverInquilino {
 	}
 
 	Inquilino(String nombreCompleto, String eMail, String telefono) {
-		this.nombreCompleto = nombreCompleto;
-		this.eMail = eMail;
-		this.telefono = telefono;
+		super(nombreCompleto, eMail, telefono);
 		this.ranking = 0;
 	}
 
