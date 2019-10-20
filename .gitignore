@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+/bin/
+
+=======
 # Compiled class file
 *.class
 
@@ -21,3 +25,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/bin/
+<<<<<<< HEAD
+
+.classpath
+=======
+>>>>>>> branch 'angelo' of https://github.com/ivanezeqgonzalez/TP-objetos2.git
+>>>>>>> branch 'master' of https://github.com/ivanezeqgonzalez/TP-objetos2.git
