@@ -10,18 +10,19 @@ public class Inmueble implements Rankeable {
 	private int ranking;
 	private List<Servicio> servicios;
 	private List<Comentario> comentarios;
-	private Propietario dueño;
+	private Propietario propietario;
 
-	public Inmueble(TipoInmueble tipo, String pais, String ciudad, String direccion, int cantHuespedes, Propietario dueño) {
+	public Inmueble(TipoInmueble tipo, String pais, String ciudad, String direccion, int cantHuespedes, Propietario propietario) {
 		super();
 		this.tipo = tipo;
 		this.pais = pais;
 		this.ciudad = ciudad;
 		this.direccion = direccion;
 		this.cantHuespedes = cantHuespedes;
-		this.dueño = dueño;
+		this.propietario = propietario;
 
 		this.servicios = new ArrayList<Servicio>();
+		this.comentarios = new ArrayList<Comentario>();
 	}
 	
 	public void agregarServicio(Servicio servicio) {
@@ -41,8 +42,8 @@ public class Inmueble implements Rankeable {
 		return direccion;
 	}
 
-	public Propietario getDueño() {
-		return dueño;
+	public Propietario getPropietario() {
+		return propietario;
 	}
 
 	public List<Servicio> getServicios() {

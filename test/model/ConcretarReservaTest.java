@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -16,7 +17,7 @@ class ConcretarReservaTest {
 	 * Concrecion de reserva
 	 * A partir de una publicacion:
 	 * Fase1: Inquilino realiza la reserva.
-	 * Fase2: Dueño acepta o denega la resserva.
+	 * Fase2: Dueï¿½o acepta o denega la resserva.
 	 * En caso de aceptar:
 	 * - Se concreta la reserva.
 	 * - Notifica al inquilino.
@@ -38,7 +39,7 @@ class ConcretarReservaTest {
 		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
 		unPropietario = new Propietario("Roman", "email", "155", handlerReserva);
 		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
-		unaPublicacion = new Publicacion(unInmueble, LocalDate.of(2019,11,01), LocalDate.of(2019,12,25), 250.f);
+		unaPublicacion = new Publicacion(unPropietario, unInmueble, DateTime.now().plusMonths(5), DateTime.now().plusMonths(5).plusDays(15), 250.f);
 		
 		this.checkin = LocalDate.of(2019,11,03);
 		this.checkout = LocalDate.of(2019,11,07);
@@ -56,7 +57,7 @@ class ConcretarReservaTest {
 
 		/**
 		 * Fase2:
-		 * El dueño acepta la reserva
+		 * El dueï¿½o acepta la reserva
 		 */
 		
 		List<Reserva> lista = unPropietario.getReservasSolicitadas();
