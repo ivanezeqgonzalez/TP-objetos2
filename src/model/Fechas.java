@@ -10,7 +10,7 @@ import org.joda.time.Interval;
 
 public class Fechas {
 
-	public static boolean verificar(DateTime fechaInicio1, DateTime fechaFin1, DateTime fechaInicio2,
+	public boolean verificar(DateTime fechaInicio1, DateTime fechaFin1, DateTime fechaInicio2,
 			DateTime fechaFin2) {
 		
 		Interval rangoCheckInOut1 = new Interval (fechaInicio1, fechaFin1);

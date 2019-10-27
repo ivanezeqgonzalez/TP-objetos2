@@ -26,7 +26,7 @@ class InmuebleTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.inmueble = new Inmueble (mockTipoInmueble, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 6, mockPropietario); //Tipo; Cantidad de huespedes; dueño
+		this.inmueble = new Inmueble (mockTipoInmueble, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 6, mockPropietario); //Tipo; Cantidad de huespedes; dueï¿½o
 		
 	}
 
@@ -82,12 +82,12 @@ class InmuebleTest {
 	}
 	
 	@Test
-	void testMockDueño() {
+	void testMockDueno() {
 		//config
 		when(mockPropietario.getNombreCompleto()).thenReturn("nombre_usuario1");
 		
 		//asserting
-		assertEquals("nombre_usuario1", this.inmueble.getDueño().getNombreCompleto());
+		assertEquals("nombre_usuario1", this.inmueble.getPropietario().getNombreCompleto());
 	}
 	
 		

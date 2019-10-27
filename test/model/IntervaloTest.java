@@ -15,10 +15,11 @@ class IntervaloTest {
 	private DateTime fechaFin1;
 	private DateTime fechaInicio2;
 	private DateTime fechaFin2;
+	private Fechas unAdminFecha;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
+		unAdminFecha = new Fechas();
 	}
 
 	@Test
@@ -31,7 +32,7 @@ class IntervaloTest {
 		this.fechaFin2 = formatter.parseDateTime("15-01-2020");
 		
 		//asserting
-		assertTrue(Fechas.verificar(fechaInicio1, fechaFin1, fechaInicio2, fechaFin2));
+		assertTrue(unAdminFecha.verificar(fechaInicio1, fechaFin1, fechaInicio2, fechaFin2));
 	}
 	
 	@Test
@@ -44,7 +45,7 @@ class IntervaloTest {
 		this.fechaFin2 = formatter.parseDateTime("30-01-2020");
 		
 		//asserting
-		assertFalse(Fechas.verificar(fechaInicio1, fechaFin1, fechaInicio2, fechaFin2)); 
+		assertFalse(unAdminFecha.verificar(fechaInicio1, fechaFin1, fechaInicio2, fechaFin2)); 
 		
 	}
 

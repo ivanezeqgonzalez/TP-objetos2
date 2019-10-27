@@ -10,13 +10,13 @@ public class HandlerReserva {
 	}
 
 	public void peticionReserva(Reserva reserva) {
-		reserva.getDueño().recibirSolicitudReserva(reserva);
+		reserva.getPropietario().recibirSolicitudReserva(reserva);
 	}
 
 	public void registrarReserva(Reserva reserva) {
 		this.reservas.add(reserva);
 		reserva.getInquilino().agregarReservaAceptada(reserva);
-		reserva.getDueño().removerSolicitudReserva(reserva);
+		reserva.getPropietario().removerSolicitudReserva(reserva);
 	}
 
 }

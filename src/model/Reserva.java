@@ -32,7 +32,7 @@ public class Reserva {
 		return this.checkout;
 	}
 
-	public Propietario getDueño() {
-		return this.inmueble.getDueño();
+	public Propietario getPropietario() {
+		return this.inmueble.getPropietario();
 	}
 }
