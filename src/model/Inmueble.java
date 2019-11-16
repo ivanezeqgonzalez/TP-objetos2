@@ -7,7 +7,7 @@ public class Inmueble implements Rankeable {
 	private TipoInmueble tipo;
 	private int cantHuespedes;
 	private String pais, ciudad, direccion;
-	private int ranking;
+	private int ranking, count;
 	private List<Servicio> servicios;
 	private List<Comentario> comentarios;
 	private Propietario propietario;
@@ -20,6 +20,9 @@ public class Inmueble implements Rankeable {
 		this.direccion = direccion;
 		this.cantHuespedes = cantHuespedes;
 		this.propietario = propietario;
+		
+		this.ranking = 0;
+		this.count = 0;
 
 		this.servicios = new ArrayList<Servicio>();
 		this.comentarios = new ArrayList<Comentario>();
@@ -74,17 +77,22 @@ public class Inmueble implements Rankeable {
 
 	@Override
 	public int getRanking() {
+		if (this.count > 0) {
+			return this.ranking / this.count;
+		}
+		
 		return this.ranking;
 	}
 
 	@Override
 	public void rankear(Rankeable inmueble, int i) {
-
+	//nada
 	}
 
 	@Override
 	public void rankearse(int puntaje) {
-		this.ranking = puntaje;
+		this.ranking += puntaje;
+		this.count++;
 
 	}
 

@@ -1,20 +1,40 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class Sistema {
-	private ArrayList<Publicacion> publicaciones;
+	private HandlerPublicacion handlerPublicacion;
+	private HandlerInmueble handlerInmuebles;
 	
 	public Sistema() {
-		this.publicaciones = new ArrayList<Publicacion>();
+		this.handlerPublicacion = new HandlerPublicacion();
+		this.handlerInmuebles = new HandlerInmueble();
 	}
 	
-	public ArrayList<Publicacion> getAllPublicaciones() {
-		return this.publicaciones;
+	
+	//PUBLICACIONES
+	public List<Publicacion> getAllPublicaciones() {
+		return this.handlerPublicacion.getPublicaciones();
 	}
-	public void publicar(Propietario unPropietario, Inmueble unInmueble, LocalDate fechaInicio, LocalDate fechaFin, float precio) {
-		this.publicaciones.add(new Publicacion(unPropietario, unInmueble, fechaInicio, fechaFin, precio));
+	
+	public void publicar(Propietario propietario, Inmueble inmueble, LocalDate checkin, LocalDate checkout, float precio) {
+		this.handlerPublicacion.crearPublicacion(propietario, inmueble, checkin, checkout, precio);
 	}
+
+
+	
+	//INMUEBLES
+	public List<Inmueble> getInmuebles() {
+		// TODO Auto-generated method stub
+		return this.handlerInmuebles.getInmuebles();
+	}
+
+	public void crearInmueble(TipoInmueble tipo, String pais, String ciudad, String direccion, int cantHuespedes,	Propietario propietario) {
+		this.handlerInmuebles.crearInmueble(tipo, pais, ciudad, direccion, cantHuespedes, propietario);
+		
+	}
+	
+	
 }

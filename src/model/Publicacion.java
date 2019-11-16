@@ -1,7 +1,7 @@
 package model;
 
 import java.time.LocalDate;
-import org.joda.time.DateTime;
+
 
 public class Publicacion {
 	
@@ -12,7 +12,7 @@ public class Publicacion {
 	//private Fechas adminFechas;
 	private Propietario propietario;
 
-	Publicacion(Propietario propietario, Inmueble inm, LocalDate in, LocalDate out, Float precio) {
+	public Publicacion(Propietario propietario, Inmueble inm, LocalDate in, LocalDate out, Float precio) {
 		this.inmueble = inm;
 		this.checkin = in;
 		this.checkout = out;

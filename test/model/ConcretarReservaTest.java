@@ -61,7 +61,7 @@ class ConcretarReservaTest {
 		 * El due�o acepta la reserva
 		 */
 		
-		List<Reserva> lista = unPropietario.getReservasSolicitadas();
+		List<Reserva> lista = unPropietario.getReservasPendientes();
 		unPropietario.aceptarReserva(lista.get(0));
 		
 		assertTrue(unInquilino.getReservas().size() == 1);

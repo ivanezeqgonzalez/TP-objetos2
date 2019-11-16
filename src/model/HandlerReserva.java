@@ -3,20 +3,41 @@ package model;
 import java.util.*;
 
 public class HandlerReserva {
-	private List<Reserva> reservas;
+	private List<Reserva> reservasActivas;
+	private List<Reserva> reservasPendientes;
 
 	HandlerReserva() {
-		this.reservas = new ArrayList<Reserva>();
+		this.reservasActivas = new ArrayList<Reserva>();
+		this.reservasPendientes = new ArrayList<Reserva>();
 	}
 
+		
+	public List<Reserva> getReservasActivas() {
+		return reservasActivas;
+	}
+
+	public List<Reserva> getReservasPendientes() {
+		return reservasPendientes;
+	}
+
+	public void aceptarReserva(Reserva reserva) {
+		this.reservasActivas.add(reserva);		
+	}
+	
 	public void peticionReserva(Reserva reserva) {
-		reserva.getPropietario().recibirSolicitudReserva(reserva);
+		this.reservasPendientes.add(reserva);
 	}
 
 	public void registrarReserva(Reserva reserva) {
-		this.reservas.add(reserva);
+		this.reservasActivas.add(reserva);
+		
 		reserva.getInquilino().agregarReservaAceptada(reserva);
 		reserva.getPropietario().removerSolicitudReserva(reserva);
+	}
+
+	public void descartarSolicitud(Reserva reserva) {
+		this.reservasPendientes.remove(reserva);
+		
 	}
 
 }

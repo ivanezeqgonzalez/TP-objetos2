@@ -21,17 +21,30 @@ class RankingTest {
 
 	@Test
 	void testRankingUsuario() {
+		//una vez
 		//excercice
 		this.usuario.rankearse(10);		
+		
 		//asserting
 		assertEquals(10, this.usuario.getRanking());
+		
+		//n veces (promediable)
+		this.usuario.rankearse(6);
+		assertEquals(8, this.usuario.getRanking());
 	}
 	
 	@Test
 	void testRankingInmueble() {
+		//una vez
 		//excercice
-		this.inmueble.rankearse(5);
-		assertEquals(5, this.inmueble.getRanking());
+		this.inmueble.rankearse(10);		
+				
+		//asserting
+		assertEquals(10, this.inmueble.getRanking());
+				
+		//n veces (promediable)
+		this.inmueble.rankearse(6);
+		assertEquals(8, this.inmueble.getRanking());
 	}
 	
 	@Test

@@ -4,18 +4,13 @@ import java.util.*;
 public class Propietario extends Usuario implements ObservablePropietario {
 
 	private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
-	private String nombreCompleto;
-	private String eMail;
-	private String telefeno;
-	private ArrayList<Reserva> reservasSolicitadas = new ArrayList<Reserva>();
+	
 	private HandlerReserva handlerReserva;
 	
 	
 	public Propietario(String nombreCompleto, String eMail, String telefono, HandlerReserva hr) {
 		super(nombreCompleto, eMail, telefono);
-		this.nombreCompleto = nombreCompleto;
-		this.eMail= eMail;
-		this.telefeno= telefono;
+	
 		this.handlerReserva = hr;
 	}
 
@@ -32,16 +27,16 @@ public class Propietario extends Usuario implements ObservablePropietario {
 		
 	}
 
-	public ArrayList<Reserva> getReservasSolicitadas() {
-		return this.reservasSolicitadas;
+	public List<Reserva> getReservasPendientes() {
+		return this.handlerReserva.getReservasPendientes();
 	}
 
 	public void recibirSolicitudReserva(Reserva reserva) {
-		this.reservasSolicitadas.add(reserva);
+		this.handlerReserva.peticionReserva(reserva);
 	}
 	
 	public void removerSolicitudReserva(Reserva reserva) {
-		this.reservasSolicitadas.remove(reserva);
+		this.handlerReserva.descartarSolicitud(reserva);
 	}
 }
 
