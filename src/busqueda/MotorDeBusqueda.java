@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import exceptions.SinFiltrosObligatoriosException;
-import model.Sistema;
 import model.Publicacion;
 
 public class MotorDeBusqueda {
-	private Sistema sistema;
-	public MotorDeBusqueda(Sistema sistema) {
-		this.sistema = sistema;
+	
+	public MotorDeBusqueda() {
+		
 	}
-	public ArrayList<Publicacion> buscarPublicaciones(ArrayList<Filtro> filtros) throws SinFiltrosObligatoriosException {
+	public ArrayList<Publicacion> buscarPublicaciones(ArrayList<Publicacion> publicaciones, ArrayList<Filtro> filtros) throws SinFiltrosObligatoriosException {
 		this.verificarFiltrosObligatorios(filtros);
-		return sistema.getAllPublicaciones().stream().filter(publicacion -> this.publicacionPasaFiltros(filtros, publicacion)).collect(Collectors.toCollection(ArrayList::new));
+		return publicaciones.stream().filter(publicacion -> this.publicacionPasaFiltros(filtros, publicacion)).collect(Collectors.toCollection(ArrayList::new));
 	}
+	
 	private boolean publicacionPasaFiltros(ArrayList<Filtro> filtros, Publicacion unaPublicacion) {
 		boolean pasa = true;
 		for (int i = 0; filtros.size() > i; i++ ) {
@@ -23,6 +23,7 @@ public class MotorDeBusqueda {
 		}	
 		return pasa;
 	}
+	
 	public void verificarFiltrosObligatorios(ArrayList<Filtro> filtros) throws SinFiltrosObligatoriosException {
 		if (filtros.isEmpty() || !this.verifyFilterFecha(filtros) || !this.verifyFilterCiudad(filtros)) {
 			throw new SinFiltrosObligatoriosException("Sin Filtros Obligatorios");
