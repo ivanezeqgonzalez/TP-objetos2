@@ -36,7 +36,7 @@ class SistemaTest {
 	
 	@Test
 	void testAlPublicarAumentaEnUnoLaCantidadDePublicaciones() {
-		unSistemaNuevo.publicar(unPropietario, unInmueble, LocalDate.parse("2019-01-01"), LocalDate.parse("2020-01-20"), 5);
+		unSistemaNuevo.publicar(unPropietario, unInmueble, LocalDate.parse("2019-01-01"), LocalDate.parse("2020-01-20"), 5f);
 
 		assertEquals(unSistemaNuevo.getAllPublicaciones().size(), 1);
 	}
@@ -50,14 +50,14 @@ class SistemaTest {
 	}
 	
 	void testAlPublicarSeteaCorrectamenteLosDatos( ) {
-		unSistemaNuevo.publicar(unPropietario, unInmueble, LocalDate.parse("2019-01-01"), LocalDate.parse("2020-01-20"), 5);
+		unSistemaNuevo.publicar(unPropietario, unInmueble, LocalDate.parse("2019-01-01"), LocalDate.parse("2020-01-20"), 5f);
 		
 		assertEquals(unSistemaNuevo.getAllPublicaciones().size(), 1);
 
 		Publicacion publicacion = unSistemaNuevo.getAllPublicaciones().get(0);
 		assertEquals(unPropietario, publicacion.getPropietario());
 		assertEquals(unInmueble, publicacion.getInmueble());
-		assertEquals(5, publicacion.getPrecio());
+		assertEquals(5f, publicacion.getPrecio());
 	}
 
 	
