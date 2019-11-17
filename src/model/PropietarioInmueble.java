@@ -11,7 +11,11 @@ public class PropietarioInmueble {
 	}
 	
 	public ArrayList<Inmueble> getInmueblesPropietario(Usuario propietario) {
-		return this.propietarioInmuebles.get(propietario);
+		if(this.propietarioInmuebles.containsKey(propietario)) {
+			return this.propietarioInmuebles.get(propietario);
+		} else {
+			return new ArrayList<Inmueble>();
+		}
 	}
 	
 	public void setInmueblePropietario(Usuario propietario, Inmueble inmueble) {
@@ -19,4 +23,6 @@ public class PropietarioInmueble {
 		inmuebles.add(inmueble);
 		this.propietarioInmuebles.put(propietario, inmuebles);
 	}
+	
+	
 }
