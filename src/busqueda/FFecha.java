@@ -1,17 +1,17 @@
 package busqueda;
 
-import org.joda.time.DateTime;
+
+import java.time.LocalDate;
 
 import model.Publicacion;
 
 public class FFecha extends Filtro {
 	
-	private DateTime fecha_fin;
-	private DateTime fecha_inicio;
-
-	public FFecha(DateTime fecha_inicio2, DateTime fecha_fin2) {
-		this.fecha_inicio = fecha_inicio2;
-		this.fecha_fin = fecha_fin2;
+	private LocalDate fecha_fin, fecha_inicio;
+	
+	public FFecha(LocalDate fecha_inicio, LocalDate fecha_fin) {
+		this.fecha_inicio = fecha_inicio;
+		this.fecha_fin = fecha_fin;
 	}
 	public boolean isFilterFecha() {
 		return true;

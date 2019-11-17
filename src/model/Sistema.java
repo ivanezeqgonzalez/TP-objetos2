@@ -1,8 +1,8 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-import org.joda.time.DateTime;
 
 import busqueda.Filtro;
 import busqueda.MotorDeBusqueda;
@@ -21,7 +21,7 @@ public class Sistema {
 		return this.publicaciones;
 	}
 	
-	public void publicar(Propietario unPropietario, Inmueble unInmueble, DateTime fechaInicio, DateTime fechaFin, float precio) {
+	public void publicar(Propietario unPropietario, Inmueble unInmueble, LocalDate fechaInicio, LocalDate fechaFin, float precio) {
 		this.publicaciones.add(new Publicacion(unPropietario, unInmueble, fechaInicio, fechaFin, precio));
 	}
 	

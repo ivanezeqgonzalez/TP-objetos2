@@ -3,6 +3,8 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
+import java.time.LocalDate;
+
 import org.joda.time.DateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +27,13 @@ class SistemaTestCase {
 	}
 	@Test
 	void testAlPublicarAumentaEnUnoLaCantidadDePublicaciones() {
-		unSistemaNuevo.publicar(unPropietario, unInmueble, DateTime.now(), DateTime.now(), 5);
+		unSistemaNuevo.publicar(unPropietario, unInmueble, LocalDate.parse("2019-01-01"), LocalDate.parse("2020-01-20"), 5);
 
 		assertEquals(unSistemaNuevo.getAllPublicaciones().size(), 1);
 	}
 	@Test
 	void testAlPublicarSeteaCorrectamenteLosDatos( ) {
-		unSistemaNuevo.publicar(unPropietario, unInmueble, DateTime.now(), DateTime.now(), 5);
+		unSistemaNuevo.publicar(unPropietario, unInmueble, LocalDate.parse("2019-01-01"), LocalDate.parse("2020-01-20"), 5);
 		
 		assertEquals(unSistemaNuevo.getAllPublicaciones().size(), 1);
 
