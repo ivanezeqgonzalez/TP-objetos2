@@ -1,23 +1,20 @@
 package model;
 
-import java.time.LocalDate;
-
+import org.joda.time.DateTime;
 
 public class Publicacion {
 	
 	private Float precio;
 	private Inmueble inmueble;
-	private LocalDate checkin;
-	private LocalDate checkout;
-	//private Fechas adminFechas;
+	private Intervalo intervalo;
+	private HandlerReserva handlerReserva;
 	private Propietario propietario;
 
-	public Publicacion(Propietario propietario, Inmueble inm, LocalDate in, LocalDate out, Float precio) {
+	public Publicacion(HandlerReserva handlerReserva, Propietario propietario, Inmueble inm, DateTime in, DateTime out, Float precio) {
 		this.inmueble = inm;
-		this.checkin = in;
-		this.checkout = out;
+		this.intervalo = new Intervalo(in, out);
 		this.precio = precio;
-		//this.adminFechas = new Fechas();
+		this.handlerReserva = handlerReserva;
 		this.propietario = propietario;
 	}
 
@@ -41,19 +38,19 @@ public class Publicacion {
 	
 	
 	//METODOS PRINCIPALES
-	public void reservar(HandlerReserva hr, Inquilino unInquilino, LocalDate in, LocalDate out) {
-		hr.peticionReserva(new Reserva(unInquilino, this.inmueble, in, out));
+	public void reservar(Inquilino unInquilino, DateTime in, DateTime out) {		
+		
+		if (this.intervalo.estaDisponible(in, out)) {
+			handlerReserva.peticionReserva(new Reserva(unInquilino, this.inmueble, in, out));
+		}
+		
 	}
 	
-	public Boolean estaDisponibleEnRango(LocalDate fecha_inicio, LocalDate fecha_fin) {
-		//return this.adminFechas.fechasSeSobreponen(this.checkin,this.checkout, fecha_inicio, fecha_fin);
-		return fecha_inicio.isBefore(this.checkin) && fecha_fin.isBefore(this.checkout);
+	public Boolean estaDisponibleEnRango(DateTime fecha_inicio, DateTime fecha_fin) {
+		return this.intervalo.estaDisponible(fecha_inicio, fecha_fin);
 		
 	}
 
-	//public void setAdminFechas(Fechas adminFecha) {
-	//	this.adminFechas = adminFecha;
-	//}
 
 	
 

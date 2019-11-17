@@ -2,8 +2,9 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import java.time.LocalDate;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,18 +13,17 @@ class ReservaTest {
 	private Inquilino unInquilino;
 	private Propietario unPropietario;
 	private Reserva reserva;
-	private LocalDate checkin;
-	private LocalDate checkout;
+	private DateTime checkin, checkout;
 	private TipoInmueble mockTipoInmueble;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		mockTipoInmueble = mock(TipoInmueble.class);
-		this.unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
-		this.unPropietario = new Propietario("Roman", "email", "155", new HandlerReserva());
+		this.unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663", null);
+		this.unPropietario = new Propietario("Roman", "email", "155", null);
 		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
-		this.checkin = LocalDate.of(2019, 11, 03);
-		this.checkout = LocalDate.of(2019, 11, 07);
+		this.checkin = DateTime.parse("01/01/2019", DateTimeFormat.forPattern("dd/MM/yyyy"));
+		this.checkout = DateTime.parse("20/01/2019", DateTimeFormat.forPattern("dd/MM/yyyy"));
 		this.reserva = new Reserva(this.unInquilino, this.unInmueble, this.checkin, this.checkout);
 	}
 

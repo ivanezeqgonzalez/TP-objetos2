@@ -4,8 +4,8 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-import java.time.LocalDate;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,15 +14,15 @@ import model.Publicacion;
 public class FFechaTestCase {
 
 	private FFecha filtro;
-	private LocalDate fecha_inicio, fecha_fin;
+	private DateTime fecha_inicio, fecha_fin;
 	private Publicacion unaPublicacion;
 	
 	@Before
 	public void setUp() throws Exception {
 		//una fecha dentro de 5 meses
-		fecha_inicio = LocalDate.parse("2019-01-01");
+		fecha_inicio = DateTime.parse("2019-01-01");
 		//una fecha dentro de 5 meses y 15 dias
-		fecha_fin = LocalDate.parse("2019-01-20");
+		fecha_fin = DateTime.parse("2019-01-20");
 		filtro = new FFecha(fecha_inicio, fecha_fin);
 		unaPublicacion  = mock(Publicacion.class);
 	}

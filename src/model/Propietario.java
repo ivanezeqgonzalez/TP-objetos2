@@ -5,7 +5,6 @@ public class Propietario extends Usuario implements ObservablePropietario {
 
 	private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
 	
-	private HandlerReserva handlerReserva;
 	
 	
 	public Propietario(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
@@ -13,7 +12,7 @@ public class Propietario extends Usuario implements ObservablePropietario {
 	}
 
 	public void agregarInmueble (Inmueble inmueble) {
-		//this.sistema.(inmueble);
+		//this.sistema.
 	}
 
 	public List<Inmueble> getInmuebles() {

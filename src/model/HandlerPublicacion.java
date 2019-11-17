@@ -1,8 +1,9 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 public class HandlerPublicacion {
 	
@@ -13,10 +14,10 @@ public class HandlerPublicacion {
 		return this.publicaciones;
 	}
 
-	public void crearPublicacion(Propietario propietario, Inmueble inmueble, LocalDate checkin, LocalDate checkout,
+	public void crearPublicacion(HandlerReserva handler, Propietario propietario, Inmueble inmueble, DateTime checkin, DateTime checkout,
 			float precio) {
 		
-		this.publicaciones.add(new Publicacion(propietario, inmueble, checkin, checkout, precio));
+		this.publicaciones.add(new Publicacion(handler, propietario, inmueble, checkin, checkout, precio));
 		
 	}
 	

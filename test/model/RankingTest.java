@@ -15,7 +15,7 @@ class RankingTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		this.usuario = new Usuario ("nombre_usuario1", "email_usuario1", "tel_usuario1");
+		this.usuario = new Usuario ("nombre_usuario1", "email_usuario1", "tel_usuario1", null);
 		this.inmueble = new Inmueble (null, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 0, null); //tipo; desc; cant huespedes; dueño 
 	}
 

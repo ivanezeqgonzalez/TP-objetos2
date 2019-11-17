@@ -6,6 +6,9 @@ import static org.mockito.Mockito.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,8 +28,7 @@ class ConcretarReservaTest {
 	private Inmueble unInmueble;
 	private Inquilino unInquilino;
 	private Propietario unPropietario;
-	private LocalDate checkin;
-	private LocalDate checkout;
+	private DateTime checkin, checkout;
 	private HandlerReserva handlerReserva;
 	private TipoInmueble mockTipoInmueble;
 	@BeforeEach
@@ -34,14 +36,14 @@ class ConcretarReservaTest {
 	void setUp() throws Exception {
 		mockTipoInmueble = mock(TipoInmueble.class);
 		handlerReserva = new HandlerReserva();
-		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663");
-		unPropietario = new Propietario("Roman", "email", "155", handlerReserva);
+		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663", null);
+		unPropietario = new Propietario("Roman", "email", "155", null);
 		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
 		
-		this.checkin = LocalDate.of(2019,11,03);
-		this.checkout = LocalDate.of(2019,11,07);
+		this.checkin = DateTime.parse("03-11-2019", DateTimeFormat.forPattern("dd-MM-yyyy"));
+		this.checkout = DateTime.parse("07-11-2019", DateTimeFormat.forPattern("dd-MM-yyyy"));
 		
-		unaPublicacion = new Publicacion(unPropietario, unInmueble, checkin, checkout, 250.f);
+		unaPublicacion = new Publicacion(handlerReserva, unPropietario, unInmueble, checkin, checkout, 250.f);
 		
 		
 	}
@@ -52,19 +54,22 @@ class ConcretarReservaTest {
 		/** Fase1:
 		 * El inquilino realiza la reserva
 		 */
-		assertTrue(unInquilino.getReservas().size() == 0);
-		
-		this.unaPublicacion.reservar(handlerReserva, unInquilino, checkin, checkout);
+		assertTrue(unInquilino.getReservasPendientes().size() == 0);
+	}
+	
+	@Test
+	void test() {
+		this.unaPublicacion.reservar(unInquilino, checkin, checkout);
 
 		/**
 		 * Fase2:
-		 * El dueï¿½o acepta la reserva
+		 * El dueño acepta la reserva
 		 */
 		
 		List<Reserva> lista = unPropietario.getReservasPendientes();
 		unPropietario.aceptarReserva(lista.get(0));
 		
-		assertTrue(unInquilino.getReservas().size() == 1);
+		assertTrue(unInquilino.getReservasPendientes().size() == 1);
 		
 	}
 }

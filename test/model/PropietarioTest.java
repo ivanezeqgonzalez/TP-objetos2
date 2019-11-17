@@ -14,7 +14,7 @@ class PropietarioTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		this.propietario = new Propietario("nombre_dueño", "email_dueño", "telefono_dueño", new HandlerReserva());
+		this.propietario = new Propietario("nombre_dueño", "email_dueño", "telefono_dueño", null);
 						
 	}
 

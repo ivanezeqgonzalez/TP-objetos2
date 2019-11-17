@@ -1,15 +1,14 @@
 package busqueda;
 
-
-import java.time.LocalDate;
+import org.joda.time.DateTime;
 
 import model.Publicacion;
 
 public class FFecha extends Filtro {
 	
-	private LocalDate fecha_fin, fecha_inicio;
+	private DateTime fecha_fin, fecha_inicio;
 	
-	public FFecha(LocalDate fecha_inicio, LocalDate fecha_fin) {
+	public FFecha(DateTime fecha_inicio, DateTime fecha_fin) {
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_fin = fecha_fin;
 	}

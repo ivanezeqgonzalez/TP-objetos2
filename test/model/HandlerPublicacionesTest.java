@@ -3,22 +3,24 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-import java.time.LocalDate;
-
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class HandlerPublicacionesTest {
 
-	private HandlerPublicacion handler;
+	private HandlerPublicacion handlerPublicacion;
 	private Inmueble unInmueble;
 	private Propietario unPropietario;
+	private HandlerReserva handlerReserva;
 	 
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		this.handler = new HandlerPublicacion();
+		this.handlerPublicacion = new HandlerPublicacion();
+		this.handlerReserva = mock(HandlerReserva.class);
 		this.unInmueble = mock(Inmueble.class);
 		this.unPropietario = mock(Propietario.class);
 		
@@ -27,15 +29,16 @@ class HandlerPublicacionesTest {
 	@Test
 	void testHandlerSinPublicaciones() {
 		//asserting
-		assertTrue(this.handler.getPublicaciones().isEmpty());
+		assertTrue(this.handlerPublicacion.getPublicaciones().isEmpty());
 	
 	}
 	@Test
 	void testHandlerConPublicaciones() {
 		//excercice
-		this.handler.crearPublicacion(unPropietario, unInmueble, LocalDate.parse("2019-01-01"), LocalDate.parse("2020-01-20"), 5);
+		this.handlerPublicacion.crearPublicacion(handlerReserva, unPropietario, unInmueble, DateTime.parse("01-01-2019", DateTimeFormat.forPattern("dd-MM-yyyy")), 
+				DateTime.parse("20-01-2019", DateTimeFormat.forPattern("dd-MM-yyyy")), 5);
 		//asserting
-		assertEquals(1, this.handler.getPublicaciones().size());
+		assertEquals(1, this.handlerPublicacion.getPublicaciones().size());
 	}
 
 }

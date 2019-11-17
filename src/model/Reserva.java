@@ -1,15 +1,15 @@
 package model;
 
-import java.time.LocalDate;
+import org.joda.time.DateTime;
 
 public class Reserva {
 
 	private Inquilino inquilino;
 	private Inmueble inmueble;
-	private LocalDate checkin;
-	private LocalDate checkout;
+	private DateTime checkin;
+	private DateTime checkout;
 
-	Reserva(Inquilino inq, Inmueble inm, LocalDate in, LocalDate out) {
+	Reserva(Inquilino inq, Inmueble inm, DateTime in, DateTime out) {
 		this.inquilino = inq;
 		this.inmueble = inm;
 		this.checkin = in;
@@ -24,11 +24,11 @@ public class Reserva {
 		return this.inmueble;
 	}
 
-	public LocalDate getCheckin() {
+	public DateTime getCheckin() {
 		return this.checkin;
 	}
 
-	public LocalDate getCheckout() {
+	public DateTime getCheckout() {
 		return this.checkout;
 	}
 

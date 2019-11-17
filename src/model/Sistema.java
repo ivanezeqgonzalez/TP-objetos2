@@ -1,9 +1,10 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.joda.time.DateTime;
 
 import busqueda.Filtro;
 import busqueda.MotorDeBusqueda;
@@ -30,13 +31,14 @@ public class Sistema {
 		return this.handlerPublicacion.getPublicaciones();
 	}
 	
-	public List<Publicacion> getPublicacionesDe(Usuario usuario){
-		return this.handlerPublicacion.getPublicaciones(); //falta filtro!
+	public List<Publicacion> getPublicacionesDe(Propietario propietario){
+		return this.handlerPublicacion.getPublicaciones().stream().
+				filter(p -> p.getPropietario() == propietario).collect(Collectors.toList()); 
 	};
 	
 	
-	public void publicar(Propietario propietario, Inmueble inmueble, LocalDate checkin, LocalDate checkout, float precio) {
-		this.handlerPublicacion.crearPublicacion(propietario, inmueble, checkin, checkout, precio);
+	public void publicar(Propietario propietario, Inmueble inmueble, DateTime checkin, DateTime checkout, float precio) {
+		this.handlerPublicacion.crearPublicacion(handlerReservas, propietario, inmueble, checkin, checkout, precio);
 	}
 
 	
@@ -65,17 +67,30 @@ public class Sistema {
 		this.handlerReservas.peticionReserva(reserva);
 		
 	}
-
 	public void registrarReservaDe(Reserva reserva) {
 		this.handlerReservas.aceptarReserva(reserva);
 		
 	}
 
 	public List<Reserva> getReservasPendientesDe(Propietario propietario) {
-		return this.handlerReservas.getReservasActivas(); //falta filtro!
+		
+		return	this.handlerReservas.getReservasPendientes().stream().
+				filter(r -> r.getPropietario() == propietario).collect(Collectors.toList());
+		
 	}
+	
 	public List<Reserva> getReservasActivasDe(Inquilino inquilino) {
-		return this.handlerReservas.getReservasActivas(); //falta filtro!
+		
+		return	this.handlerReservas.getReservasActivas().stream().
+				filter(r -> r.getInquilino() == inquilino).collect(Collectors.toList());
+		
+		
+	}
+	public List<Reserva> getReservasPendientesDe(Inquilino inquilino) {
+		 
+		return	this.handlerReservas.getReservasPendientes().stream().
+				filter(r -> r.getInquilino() == inquilino).collect(Collectors.toList());
+		
 	}
 
 	public void descartarSolicitud(Reserva reserva) {
@@ -83,9 +98,6 @@ public class Sistema {
 		
 	}
 	
-	public List<Reserva> getReservasPendientesDe(Inquilino inquilino) {
-		return this.handlerReservas.getReservasActivas(); //falta filtro!
-	}
 
 	
 	
