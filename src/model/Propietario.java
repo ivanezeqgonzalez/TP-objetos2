@@ -8,35 +8,35 @@ public class Propietario extends Usuario implements ObservablePropietario {
 	private HandlerReserva handlerReserva;
 	
 	
-	public Propietario(String nombreCompleto, String eMail, String telefono, HandlerReserva hr) {
-		super(nombreCompleto, eMail, telefono);
-	
-		this.handlerReserva = hr;
+	public Propietario(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
+		super(nombreCompleto, eMail, telefono, sistema);
 	}
 
 	public void agregarInmueble (Inmueble inmueble) {
-		this.inmuebles.add(inmueble);
+		this.sistema.(inmueble);
 	}
 
 	public List<Inmueble> getInmuebles() {
 		return this.inmuebles;
 	}
 	
-	public void aceptarReserva(Reserva reserva) {
-		this.handlerReserva.registrarReserva(reserva);
-		
-	}
-
-	public List<Reserva> getReservasPendientes() {
-		return this.handlerReserva.getReservasPendientes();
-	}
-
+	
+	//RESERVAS
 	public void recibirSolicitudReserva(Reserva reserva) {
-		this.handlerReserva.peticionReserva(reserva);
+		this.sistema.cargarSolicutudReserva(reserva);
 	}
 	
+	public void aceptarReserva(Reserva reserva) {
+		this.sistema.registrarReservaDe(reserva);
+		
+	}	
+	
+	public List<Reserva> getReservasPendientes() {
+		return this.sistema.getReservasPendientesDe(this);
+	}
+
 	public void removerSolicitudReserva(Reserva reserva) {
-		this.handlerReserva.descartarSolicitud(reserva);
+		this.sistema.descartarSolicitud(reserva);
 	}
 }
 

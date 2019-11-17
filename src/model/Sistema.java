@@ -13,11 +13,13 @@ public class Sistema {
 
 	private HandlerPublicacion handlerPublicacion;
 	private HandlerInmueble handlerInmuebles;
+	private HandlerReserva handlerReservas;
 	private MotorDeBusqueda buscador;
 	
 	public Sistema() {
 		this.handlerPublicacion = new HandlerPublicacion();
 		this.handlerInmuebles = new HandlerInmueble();
+		this.handlerReservas = new HandlerReserva();
 		this.buscador = new MotorDeBusqueda();
 
 	}
@@ -27,6 +29,9 @@ public class Sistema {
 	public List<Publicacion> getAllPublicaciones() {
 		return this.handlerPublicacion.getPublicaciones();
 	}
+	
+	public List<Publicacion> getPublicacionesDe(Usuario usuario);
+	
 	
 	public void publicar(Propietario propietario, Inmueble inmueble, LocalDate checkin, LocalDate checkout, float precio) {
 		this.handlerPublicacion.crearPublicacion(propietario, inmueble, checkin, checkout, precio);
