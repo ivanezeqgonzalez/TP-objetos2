@@ -30,7 +30,9 @@ public class Sistema {
 		return this.handlerPublicacion.getPublicaciones();
 	}
 	
-	public List<Publicacion> getPublicacionesDe(Usuario usuario);
+	public List<Publicacion> getPublicacionesDe(Usuario usuario){
+		return this.handlerPublicacion.getPublicaciones(); //falta filtro!
+	};
 	
 	
 	public void publicar(Propietario propietario, Inmueble inmueble, LocalDate checkin, LocalDate checkout, float precio) {
@@ -55,5 +57,42 @@ public class Sistema {
 	public ArrayList<Publicacion> buscarPublicaciones(ArrayList<Publicacion> publicaciones, ArrayList<Filtro> filtros) throws SinFiltrosObligatoriosException {
 		return this.buscador.buscarPublicaciones(publicaciones, filtros);
 	}
+
+	
+	
+	//RESERVAS (SIN TDD)
+	public void cargarSolicutudReserva(Reserva reserva) {
+		this.handlerReservas.peticionReserva(reserva);
+		
+	}
+
+	public void registrarReservaDe(Reserva reserva) {
+		this.handlerReservas.aceptarReserva(reserva);
+		
+	}
+
+	public List<Reserva> getReservasPendientesDe(Propietario propietario) {
+		return this.handlerReservas.getReservasActivas(); //falta filtro!
+	}
+	public List<Reserva> getReservasActivasDe(Inquilino inquilino) {
+		return this.handlerReservas.getReservasActivas(); //falta filtro!
+	}
+
+	public void descartarSolicitud(Reserva reserva) {
+		this.handlerReservas.descartarSolicitud(reserva);
+		
+	}
+	
+	public List<Reserva> getReservasPendientesDe(Inquilino inquilino) {
+		return this.handlerReservas.getReservasActivas(); //falta filtro!
+	}
+
+	
+	
+	
+	
+	
+	
+	
 
 }

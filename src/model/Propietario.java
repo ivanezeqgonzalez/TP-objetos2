@@ -13,7 +13,7 @@ public class Propietario extends Usuario implements ObservablePropietario {
 	}
 
 	public void agregarInmueble (Inmueble inmueble) {
-		this.sistema.(inmueble);
+		//this.sistema.(inmueble);
 	}
 
 	public List<Inmueble> getInmuebles() {

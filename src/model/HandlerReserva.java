@@ -28,13 +28,6 @@ public class HandlerReserva {
 		this.reservasPendientes.add(reserva);
 	}
 
-	public void registrarReserva(Reserva reserva) {
-		this.reservasActivas.add(reserva);
-		
-		reserva.getInquilino().agregarReservaAceptada(reserva);
-		reserva.getPropietario().removerSolicitudReserva(reserva);
-	}
-
 	public void descartarSolicitud(Reserva reserva) {
 		this.reservasPendientes.remove(reserva);
 		
