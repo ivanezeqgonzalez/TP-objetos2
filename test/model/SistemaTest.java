@@ -8,20 +8,30 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class SistemaTest {
 
 	private Sistema unSistemaNuevo;
 	private Inmueble unInmueble;
 	private Propietario unPropietario;
+	private Inquilino unInquilino;
 	private TipoInmueble unTipoInmueble;
+	private Reserva unaReserva;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		unSistemaNuevo = new Sistema();
 		unInmueble = mock(Inmueble.class);
 		unPropietario = mock(Propietario.class);
+		unInquilino = mock(Inquilino.class);
 		unTipoInmueble = mock(TipoInmueble.class);
+		unaReserva = mock(Reserva.class);
+		
+		Mockito.when(unaReserva.getInquilino()).thenReturn(unInquilino);
+		Mockito.when(unaReserva.getPropietario()).thenReturn(unPropietario);
+
+		
 	}
 
 	@Test
@@ -50,6 +60,7 @@ class SistemaTest {
 		assertFalse(this.unSistemaNuevo.getInmuebles().isEmpty());
 	}
 	
+	@Test
 	void testAlPublicarSeteaCorrectamenteLosDatos( ) {
 		unSistemaNuevo.publicar(unPropietario, unInmueble, DateTime.parse("01-01-2019", DateTimeFormat.forPattern("dd-MM-yyyy")), 
 				DateTime.parse("20-01-2019", DateTimeFormat.forPattern("dd-MM-yyyy")), 5f);
@@ -61,6 +72,42 @@ class SistemaTest {
 		assertEquals(unInmueble, publicacion.getInmueble());
 		assertEquals(5f, publicacion.getPrecio());
 	}
+	
+	@Test
+	void testCargarReservaGeneral() {
+		
+		assertTrue(unSistemaNuevo.getReservasPendientes().isEmpty());
+		unSistemaNuevo.cargarSolicutudReserva(unaReserva);
+		assertFalse(unSistemaNuevo.getReservasPendientes().isEmpty());
+		
+		assertTrue(unSistemaNuevo.getReservasActivas().isEmpty());
+		unSistemaNuevo.registrarReservaDe(unaReserva);
+		assertFalse(unSistemaNuevo.getReservasActivas().isEmpty());
+		
+	}
+	
+	@Test
+	void testCargarReservaGeneralEspecifico() {
+		
+		unSistemaNuevo.cargarSolicutudReserva(unaReserva);
+	
+		assertFalse(unSistemaNuevo.getReservasPendientesDe(unInquilino).isEmpty());
+		assertFalse(unSistemaNuevo.getReservasPendientesDe(unPropietario).isEmpty());
+		
+		unSistemaNuevo.registrarReservaDe(unaReserva);
+		assertFalse(unSistemaNuevo.getReservasActivasDe(unInquilino).isEmpty());
+	}
+	
+	@Test 
+	void testDescartarSolicitudPendiente(){
+		unSistemaNuevo.cargarSolicutudReserva(unaReserva);
+		assertFalse(unSistemaNuevo.getReservasPendientes().isEmpty());
+		
+		unSistemaNuevo.descartarSolicitud(unaReserva);
+		assertTrue(unSistemaNuevo.getReservasPendientes().isEmpty());
+	}
+	
+	
 
 	
 }

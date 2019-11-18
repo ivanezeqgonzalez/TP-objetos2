@@ -62,7 +62,15 @@ public class Sistema {
 
 	
 	
-	//RESERVAS (SIN TDD)
+	//RESERVAS
+	public List<Reserva> getReservasActivas() {
+		return this.handlerReservas.getReservasActivas();
+	}
+	
+	public List<Reserva> getReservasPendientes(){
+		return this.handlerReservas.getReservasPendientes();
+	}
+	
 	public void cargarSolicutudReserva(Reserva reserva) {
 		this.handlerReservas.peticionReserva(reserva);
 		
