@@ -16,7 +16,6 @@ class SistemaTest {
 	private Inmueble unInmueble;
 	private Propietario unPropietario;
 	private Inquilino unInquilino;
-	private TipoInmueble unTipoInmueble;
 	private Reserva unaReserva;
 	
 	@BeforeEach
@@ -25,7 +24,6 @@ class SistemaTest {
 		unInmueble = mock(Inmueble.class);
 		unPropietario = mock(Propietario.class);
 		unInquilino = mock(Inquilino.class);
-		unTipoInmueble = mock(TipoInmueble.class);
 		unaReserva = mock(Reserva.class);
 		
 		Mockito.when(unaReserva.getInquilino()).thenReturn(unInquilino);
@@ -55,7 +53,7 @@ class SistemaTest {
 	@Test
 	void testAlCrearInmuebleAumentaEnUnoLaCantidadDeInmuebles() {
 		//excercice
-		this.unSistemaNuevo.crearInmueble(unTipoInmueble, "pais", "ciudad", "direccion", 1, unPropietario);
+		this.unSistemaNuevo.crearInmueble(unInmueble, unPropietario);
 		//asserting
 		assertFalse(this.unSistemaNuevo.getInmuebles().isEmpty());
 	}

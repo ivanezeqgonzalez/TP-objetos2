@@ -49,8 +49,8 @@ public class Sistema {
 	}
 
 
-	public void crearInmueble(TipoInmueble tipo, String pais, String ciudad, String direccion, int cantHuespedes,	Propietario propietario) {
-		this.handlerInmuebles.crearInmueble(tipo, pais, ciudad, direccion, cantHuespedes, propietario);
+	public void crearInmueble(Inmueble inmueble, Propietario propietario) {
+		this.handlerInmuebles.setInmueblePropietario(inmueble, propietario);
 		
 	}
 
@@ -106,7 +106,14 @@ public class Sistema {
 		
 	}
 	
+	public Propietario getPropietario(Inmueble inmueble) {	
+		return this.handlerInmuebles.getPropietario(inmueble);
+	}
 
+
+	public List<Inmueble> getInmuebles(Propietario propietario) {
+		return this.handlerInmuebles.getInmuebles(propietario);
+	}
 	
 	
 	
