@@ -7,10 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
+import java.util.List;
+
 class PropietarioTest {
 
 	private Propietario propietario;
 	private Inmueble mockInmueble = mock(Inmueble.class);
+	private Sistema mockSistema = mock(Sistema.class);
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -19,13 +22,24 @@ class PropietarioTest {
 	}
 
 	@Test
-	void testCrearPublicacion() {
-		//excercice
-		this.propietario.agregarInmueble(mockInmueble);
+	void testRecibirSolicitudReserva() {
+
+	}
+	
+	@Test
+	void testAceptarReserva() {
 		
-		//asserting
-		assertTrue(this.propietario.getInmuebles().contains(mockInmueble));
-				
+		
+	}	
+	
+	@Test
+	void testGetReservasPendientes() {
+		
+	}
+
+	@Test
+	void testRemoverSolicitudReserva() {
+		
 	}
 
 }

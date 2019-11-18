@@ -31,24 +31,16 @@ class HandlerInmuebleTest {
 	}
 	
 	@Test
-	void testHandlerConInmuebles() {
-		//exercise
-		this.handler.crearInmueble(mockTipoInmueble, "pais", "ciudad", "direccion", 1, mockPropietario);
-		//asserting
-		assertEquals(1, this.handler.getInmuebles().size());
-	}
-
-	@Test
 	void testGetInmueblesPropietario() {
 		assertEquals(0, handler.getInmueblesPropietario(mockPropietario).size());
-		handler.setInmueblePropietario(mockPropietario, mockInmueble);
+		handler.setInmueblePropietario(mockInmueble, mockPropietario);
 		assertEquals(1, handler.getInmueblesPropietario(mockPropietario).size());
 	}
 
 	@Test
 	void testSetInmueblePropietario() {
 		assertEquals(0, handler.getInmueblesPropietario(mockPropietario).size());
-		handler.setInmueblePropietario(mockPropietario, mockInmueble);
+		handler.setInmueblePropietario(mockInmueble, mockPropietario);
 		assertEquals(1, handler.getInmueblesPropietario(mockPropietario).size());
 	}
 }

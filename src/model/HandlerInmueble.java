@@ -1,18 +1,21 @@
 package model;
 
+import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class HandlerInmueble {
-	private HashMap <Usuario, ArrayList<Inmueble> > propietarioInmuebles;
-	private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
+	private HashMap <Propietario, ArrayList<Inmueble> > propietarioInmuebles;
+	//private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
 	
 	public HandlerInmueble() {
-		this.propietarioInmuebles = new HashMap<Usuario, ArrayList<Inmueble>>();
+		this.propietarioInmuebles = new HashMap<Propietario, ArrayList<Inmueble>>();
 	}
 	
-	public ArrayList<Inmueble> getInmueblesPropietario(Usuario propietario) {
+	public ArrayList<Inmueble> getInmueblesPropietario(Propietario propietario) {
 		if(this.propietarioInmuebles.containsKey(propietario)) {
 			return this.propietarioInmuebles.get(propietario);
 		} else {
@@ -20,19 +23,34 @@ public class HandlerInmueble {
 		}
 	}
 	
-	public void setInmueblePropietario(Usuario propietario, Inmueble inmueble) {
+	public void setInmueblePropietario(Inmueble inmueble, Propietario propietario) {
 		ArrayList <Inmueble> inmuebles = this.getInmueblesPropietario(propietario);
 		inmuebles.add(inmueble);
 		this.propietarioInmuebles.put(propietario, inmuebles);
 	}
 	
-	public List<Inmueble> getInmuebles() {
-		return this.inmuebles;
+	public ArrayList<Inmueble> getInmuebles() {
+		return this.propietarioInmuebles.values();
 	}
 
-	public void crearInmueble(TipoInmueble tipo, String pais, String ciudad, String direccion, int cantHuespedes, Propietario propietario) {
-		this.inmuebles.add(new Inmueble(tipo, pais, ciudad, direccion, cantHuespedes, propietario));
+	public List<Inmueble> getInmuebles(propietario) {
+		return this.propietarioInmuebles.get(propietario);
 	}
 	
+	public Propietario getPropietario(Inmueble inmueble) {
+		return this.getKeysFromValue(this.propietarioInmuebles, inmueble).get(0);
+				
+	
+	}
+	
+	private List<Propietario> getKeysFromValue(HashMap<Propietario, ArrayList<Inmueble>> hm, Inmueble value){
+	    List <Propietario> list = new ArrayList<Propietario>();
+	    for(Propietario o:hm.keySet()){
+	        if(hm.get(o).equals(value)) {
+	            list.add(o);
+	        }
+	    }
+	    return list;
+	  }
 
 }
