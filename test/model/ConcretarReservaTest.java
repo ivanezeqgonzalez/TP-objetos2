@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -14,16 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 class ConcretarReservaTest {
-	/**
-	 * Concrecion de reserva
-	 * A partir de una publicacion:
-	 * Fase1: Inquilino realiza la reserva.
-	 * Fase2: Dueï¿½o acepta o denega la resserva.
-	 * En caso de aceptar:
-	 * - Se concreta la reserva.
-	 * - Notifica al inquilino.
-	 * - Registra en el sistema la reserva
-	 */
+	
 	private Publicacion unaPublicacion;
 	private Inmueble unInmueble;
 	private Inquilino unInquilino;
@@ -31,13 +23,17 @@ class ConcretarReservaTest {
 	private DateTime checkin, checkout;
 	private HandlerReserva handlerReserva;
 	private TipoInmueble mockTipoInmueble;
+	private Sistema mockSistema;
+	
 	@BeforeEach
 	
 	void setUp() throws Exception {
 		mockTipoInmueble = mock(TipoInmueble.class);
+		mockSistema = mock(Sistema.class);
 		handlerReserva = new HandlerReserva();
-		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663", null);
-		unPropietario = new Propietario("Roman", "email", "155", null);
+		
+		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663", mockSistema);
+		unPropietario = new Propietario("Roman", "email", "155", mockSistema);
 		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
 		
 		this.checkin = DateTime.parse("03-11-2019", DateTimeFormat.forPattern("dd-MM-yyyy"));
@@ -50,28 +46,23 @@ class ConcretarReservaTest {
 	
 	@Test 
 	void testConcretarReserva() {
-				
-		/** Fase1:
-		 * El inquilino realiza la reserva
-		 */
-		assertTrue(unInquilino.getReservasPendientes().size() == 0);
+		
+		//Reserva pendiente
+		unaPublicacion.reservar(unInquilino, checkin, checkout);
+		List<Reserva> resultadoFiltro = handlerReserva.getReservasPendientes().stream().
+				filter(r -> r.getInquilino() == unInquilino).collect(Collectors.toList());
+		
+		assertEquals(1, resultadoFiltro.size());
+		
+		//Reserva concretada
+		assertTrue(handlerReserva.getReservasActivas().isEmpty());
+		
+		Reserva reservaPendiente = resultadoFiltro.get(0);
+		unPropietario.aceptarReserva(reservaPendiente);
+		verify(mockSistema).registrarReservaDe(reservaPendiente);
 	}
 	
-	@Test
-	void test() {
-		this.unaPublicacion.reservar(unInquilino, checkin, checkout);
-
-		/**
-		 * Fase2:
-		 * El dueño acepta la reserva
-		 */
-		
-		List<Reserva> lista = unPropietario.getReservasPendientes();
-		unPropietario.aceptarReserva(lista.get(0));
-		
-		assertTrue(unInquilino.getReservasPendientes().size() == 1);
-		
-	}
+	
 }
 
 
