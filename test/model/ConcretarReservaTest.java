@@ -3,16 +3,13 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class ConcretarReservaTest {
 	
@@ -59,7 +56,7 @@ class ConcretarReservaTest {
 		
 		Reserva reservaPendiente = resultadoFiltro.get(0);
 		unPropietario.aceptarReserva(reservaPendiente);
-		verify(mockSistema).registrarReservaDe(reservaPendiente);
+		verify(mockSistema).registrarReservaDe(reservaPendiente, unPropietario);
 	}
 	
 	
