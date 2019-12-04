@@ -4,6 +4,7 @@ import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -29,12 +30,17 @@ public class HandlerInmueble {
 		this.propietarioInmuebles.put(propietario, inmuebles);
 	}
 	
-	public ArrayList<Inmueble> getInmuebles() {
-		return this.propietarioInmuebles.values();
-	}
-
-	public List<Inmueble> getInmuebles(propietario) {
+	public ArrayList<Inmueble> getInmuebles(Propietario propietario) {
 		return this.propietarioInmuebles.get(propietario);
+	}
+	
+	public ArrayList<Inmueble> getInmuebles() {
+		ArrayList inmuebles = new ArrayList<Inmueble>();
+		Set<Propietario> propietarios = this.propietarioInmuebles.keySet();
+		for(Propietario p : propietarios) {
+			inmuebles.addAll(this.propietarioInmuebles.get(p));
+		}
+		return inmuebles;
 	}
 	
 	public Propietario getPropietario(Inmueble inmueble) {
