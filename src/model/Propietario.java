@@ -3,8 +3,6 @@ import java.util.*;
 
 public class Propietario extends Usuario implements ObservablePropietario {
 
-	private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
-	
 	
 	
 	public Propietario(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
