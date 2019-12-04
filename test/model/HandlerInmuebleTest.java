@@ -23,12 +23,6 @@ class HandlerInmuebleTest {
 		this.mockPropietario = mock(Propietario.class);
 		this.mockTipoInmueble = mock(TipoInmueble.class);
 	}
-
-	@Test
-	void testHandlerSinInmuebles() {
-		//asserting
-		assertTrue(this.handler.getInmuebles().isEmpty());
-	}
 	
 	@Test
 	void testGetInmueblesPropietario() {

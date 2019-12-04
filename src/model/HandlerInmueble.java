@@ -29,11 +29,7 @@ public class HandlerInmueble {
 		this.propietarioInmuebles.put(propietario, inmuebles);
 	}
 	
-	public ArrayList<Inmueble> getInmuebles() {
-		return this.propietarioInmuebles.values();
-	}
-
-	public List<Inmueble> getInmuebles(propietario) {
+	public ArrayList<Inmueble> getInmuebles(Propietario propietario) {
 		return this.propietarioInmuebles.get(propietario);
 	}
 	
