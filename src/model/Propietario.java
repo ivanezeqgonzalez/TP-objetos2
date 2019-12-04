@@ -1,9 +1,8 @@
 package model;
 import java.util.*;
 
-public class Propietario extends Usuario implements ObservablePropietario {
+public class Propietario extends Usuario{
 
-	
 	
 	public Propietario(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
 		super(nombreCompleto, eMail, telefono, sistema);
@@ -19,13 +18,9 @@ public class Propietario extends Usuario implements ObservablePropietario {
 	
 	
 	//RESERVAS
-	public void recibirSolicitudReserva(Reserva reserva) {
-		this.sistema.cargarSolicutudReserva(reserva);
-	}
 	
 	public void aceptarReserva(Reserva reserva) {
-		this.sistema.registrarReservaDe(reserva);
-		
+		this.sistema.registrarReservaDe(reserva, this);		
 	}	
 	
 	public List<Reserva> getReservasPendientes() {
