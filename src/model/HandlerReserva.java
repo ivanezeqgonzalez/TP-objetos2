@@ -1,35 +1,36 @@
 package model;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class HandlerReserva {
-	private List<Reserva> reservasActivas;
-	private List<Reserva> reservasPendientes;
+	private List<Reserva> reservas;
+	
 
 	HandlerReserva() {
-		this.reservasActivas = new ArrayList<Reserva>();
-		this.reservasPendientes = new ArrayList<Reserva>();
+		this.reservas = new ArrayList<Reserva>();		
 	}
 
 		
 	public List<Reserva> getReservasActivas() {
-		return reservasActivas;
+		return this.reservas.stream().filter(r -> r.esActiva()).collect(Collectors.toList());
 	}
 
 	public List<Reserva> getReservasPendientes() {
-		return reservasPendientes;
+		return this.reservas.stream().filter(r -> ! r.esActiva()).collect(Collectors.toList());
 	}
 
 	public void aceptarReserva(Reserva reserva) {
-		this.reservasActivas.add(reserva);		
+		reserva.setActiva();
+		this.reservas.add(reserva);		
 	}
 	
 	public void peticionReserva(Reserva reserva) {
-		this.reservasPendientes.add(reserva);
+		this.reservas.add(reserva);
 	}
 
 	public void descartarSolicitud(Reserva reserva) {
-		this.reservasPendientes.remove(reserva);
+		this.reservas.remove(reserva);
 		
 	}
 
