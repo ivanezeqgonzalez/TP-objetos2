@@ -71,13 +71,11 @@ public class Sistema {
 		return this.handlerReservas.getReservasPendientes();
 	}
 	
-	public void cargarSolicutudReserva(Reserva reserva) {
-		this.handlerReservas.peticionReserva(reserva);
-		
-	}
-	public void registrarReservaDe(Reserva reserva) {
-		this.handlerReservas.aceptarReserva(reserva);
-		
+	
+	public void registrarReservaDe(Reserva reserva, Propietario propietario) {
+		if (reserva.getPropietario().equals(propietario) &&	getReservasPendientesDe(propietario).contains(reserva)) {
+			this.handlerReservas.aceptarReserva(reserva);			
+		}		
 	}
 
 	public List<Reserva> getReservasPendientesDe(Propietario propietario) {
