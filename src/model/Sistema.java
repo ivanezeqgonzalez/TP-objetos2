@@ -63,6 +63,10 @@ public class Sistema {
 	
 	
 	//RESERVAS
+	public void peticionReserva(Reserva reserva) {
+		this.handlerReservas.peticionReserva(reserva);
+	}
+	
 	public List<Reserva> getReservasActivas() {
 		return this.handlerReservas.getReservasActivas();
 	}
@@ -110,7 +114,7 @@ public class Sistema {
 
 
 	public List<Inmueble> getInmuebles(Propietario propietario) {
-		return this.handlerInmuebles.getInmuebles(propietario);
+		return this.handlerInmuebles.getInmueblesPropietario(propietario);
 	}
 	
 	
