@@ -59,7 +59,22 @@ class ConcretarReservaTest {
 		verify(mockSistema).registrarReservaDe(reservaPendiente, unPropietario);
 	}
 	
+	@Test
+	void testAceptarReserva() {
+		Reserva mockReserva = mock(Reserva.class);
+		when(mockReserva.esActiva()).thenReturn(true);
+		handlerReserva.aceptarReserva(mockReserva);
+		assertEquals(1, handlerReserva.getReservasActivas().size());
+	}
 	
+	@Test
+	void testRemoverReserva() {
+		Reserva mockReserva = mock(Reserva.class);
+		handlerReserva.peticionReserva(mockReserva);
+		assertEquals(1, handlerReserva.getReservasPendientes().size());
+		handlerReserva.descartarSolicitud(mockReserva);
+		assertEquals(0, handlerReserva.getReservasPendientes().size());
+	}
 }
 
 

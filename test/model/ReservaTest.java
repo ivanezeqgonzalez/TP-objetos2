@@ -46,4 +46,14 @@ class ReservaTest {
 	void getCheckout() {
 		assertEquals(this.checkout, this.reserva.getCheckout());
 	}
+	
+	@Test
+	void getPropietario() {
+		assertEquals(this.unPropietario, this.reserva.getPropietario());
+	}
+	
+	@Test
+	void getActiva() {
+		assertFalse(this.reserva.esActiva());
+	}
 }

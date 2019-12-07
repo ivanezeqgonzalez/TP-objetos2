@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class HandlerInmueble {
 	private HashMap <Propietario, ArrayList<Inmueble> > propietarioInmuebles;
-	//private List<Inmueble> inmuebles = new ArrayList<Inmueble>();
 	
 	public HandlerInmueble() {
 		this.propietarioInmuebles = new HashMap<Propietario, ArrayList<Inmueble>>();
@@ -30,9 +29,6 @@ public class HandlerInmueble {
 		this.propietarioInmuebles.put(propietario, inmuebles);
 	}
 	
-	public ArrayList<Inmueble> getInmuebles(Propietario propietario) {
-		return this.propietarioInmuebles.get(propietario);
-	}
 	
 	public ArrayList<Inmueble> getInmuebles() {
 		ArrayList inmuebles = new ArrayList<Inmueble>();
@@ -42,21 +38,4 @@ public class HandlerInmueble {
 		}
 		return inmuebles;
 	}
-	
-	public Propietario getPropietario(Inmueble inmueble) {
-		return this.getKeysFromValue(this.propietarioInmuebles, inmueble).get(0);
-				
-	
-	}
-	
-	private List<Propietario> getKeysFromValue(HashMap<Propietario, ArrayList<Inmueble>> hm, Inmueble value){
-	    List <Propietario> list = new ArrayList<Propietario>();
-	    for(Propietario o:hm.keySet()){
-	        if(hm.get(o).equals(value)) {
-	            list.add(o);
-	        }
-	    }
-	    return list;
-	  }
-
 }

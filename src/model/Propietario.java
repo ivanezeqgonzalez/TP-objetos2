@@ -7,6 +7,8 @@ public class Propietario extends Usuario{
 	public Propietario(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
 		super(nombreCompleto, eMail, telefono, sistema);
 	}
+
+
 	
 	//RESERVAS
 	
