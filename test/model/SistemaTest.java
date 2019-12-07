@@ -112,11 +112,6 @@ class SistemaTest {
 	}
 	
 	@Test
-	void testGetPropietario() {
-		unSistemaNuevo.getPropietario(unInmueble);
-	}
-	
-	@Test
 	void testGetInmuebles() {
 		assertTrue(unSistemaNuevo.getInmuebles().isEmpty());
 	}
