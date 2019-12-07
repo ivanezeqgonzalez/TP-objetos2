@@ -1,7 +1,7 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 
 import org.joda.time.DateTime;
@@ -10,6 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+/**
+ * 
+ * Los test que solamente tienen una llamada a un método.
+ * Son testeados en sus clases correspondientes.
+ * 
+ * */
 class SistemaTest {
 
 	private Sistema unSistemaNuevo;
@@ -72,42 +78,56 @@ class SistemaTest {
 	}
 	
 	@Test
-	void testCargarReservaGeneral() {
-		
+	void testPeticionReserva() {
 		assertTrue(unSistemaNuevo.getReservasPendientes().isEmpty());
-		unSistemaNuevo.cargarSolicutudReserva(unaReserva);
-		assertFalse(unSistemaNuevo.getReservasPendientes().isEmpty());
-		
+		unSistemaNuevo.peticionReserva(unaReserva);
+		assertEquals(1, unSistemaNuevo.getReservasPendientes().size());
+	}
+	
+	
+	@Test
+	void testGetReservasActivasYRegistrarReservaDe() {
 		assertTrue(unSistemaNuevo.getReservasActivas().isEmpty());
-		unSistemaNuevo.registrarReservaDe(unaReserva);
-		assertFalse(unSistemaNuevo.getReservasActivas().isEmpty());
+		unSistemaNuevo.peticionReserva(unaReserva);
+		when(unaReserva.esActiva()).thenReturn(true);
+		unSistemaNuevo.registrarReservaDe(unaReserva, unPropietario);
 		
+		assertEquals(1, unSistemaNuevo.getReservasActivas().size());
+		assertFalse(unSistemaNuevo.getReservasActivas().isEmpty());
 	}
 	
 	@Test
-	void testCargarReservaGeneralEspecifico() {
-		
-		unSistemaNuevo.cargarSolicutudReserva(unaReserva);
+	void testGetPublicacionesDePropietario() {
+		unSistemaNuevo.getPublicacionesDe(unPropietario);
+	}
 	
-		assertFalse(unSistemaNuevo.getReservasPendientesDe(unInquilino).isEmpty());
-		assertFalse(unSistemaNuevo.getReservasPendientesDe(unPropietario).isEmpty());
-		
-		unSistemaNuevo.registrarReservaDe(unaReserva);
-		assertFalse(unSistemaNuevo.getReservasActivasDe(unInquilino).isEmpty());
+	@Test
+	void testGetReservasActivasDe() {
+		assertTrue(unSistemaNuevo.getReservasActivasDe(unInquilino).isEmpty());
 	}
 	
 	@Test 
-	void testDescartarSolicitudPendiente(){
-		unSistemaNuevo.cargarSolicutudReserva(unaReserva);
-		assertFalse(unSistemaNuevo.getReservasPendientes().isEmpty());
-		
+	void testDescartarSolicitud() {
 		unSistemaNuevo.descartarSolicitud(unaReserva);
-		assertTrue(unSistemaNuevo.getReservasPendientes().isEmpty());
 	}
 	
+	@Test
+	void testGetPropietario() {
+		unSistemaNuevo.getPropietario(unInmueble);
+	}
 	
+	@Test
+	void testGetInmuebles() {
+		assertTrue(unSistemaNuevo.getInmuebles().isEmpty());
+	}
 	
+	@Test
+	void testGetInmueblesDePropietario() {
+		assertTrue(unSistemaNuevo.getInmuebles(unPropietario).isEmpty());
+	}
 	
-
-	
+	@Test
+	void testGetReservasPendientesDeInquilino() {
+		unSistemaNuevo.getReservasPendientesDe(unInquilino);
+	}
 }
