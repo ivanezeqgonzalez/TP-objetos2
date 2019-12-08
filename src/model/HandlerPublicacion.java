@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
 
@@ -10,15 +11,22 @@ public class HandlerPublicacion {
 	private List<Publicacion> publicaciones = new ArrayList<Publicacion>();
 
 	public List<Publicacion> getPublicaciones() {
-		// TODO Auto-generated method stub
 		return this.publicaciones;
 	}
+	
+	public void setPublicaciones(List<Publicacion> publicaciones) {
+		this.publicaciones.addAll(publicaciones);
+	}
 
-	public void crearPublicacion(HandlerReserva handler, Propietario propietario, Inmueble inmueble, DateTime checkin, DateTime checkout,
+	public Publicacion crearPublicacion(Inmueble inmueble, DateTime checkin, DateTime checkout,
 			float precio) {
-		
-		this.publicaciones.add(new Publicacion(handler, propietario, inmueble, checkin, checkout, precio));
-		
+		Publicacion pub = new Publicacion(inmueble, checkin, checkout, precio);
+		this.publicaciones.add(pub);
+		return pub;
+	}
+
+	public List<Publicacion> getPublicacionesActivas() {
+		return this.publicaciones.stream().filter(p -> p.esActiva()).collect(Collectors.toList());
 	}
 	
 	

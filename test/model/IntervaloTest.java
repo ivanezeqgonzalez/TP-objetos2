@@ -89,5 +89,14 @@ class IntervaloTest {
 		assertEquals(unIntervaloMultiple.getIntervalos().get(1).getEnd(), fecha4);	
 
 	}
+	@Test
+	void testVerifyActConIntervalos() {
+		assert(unIntervaloMultiple.verifyAct());
+	}
+	@Test
+	void testVerifyActSinIntervalos() {
+		unIntervaloMultiple.restarIntervalo(fecha2, fecha4);
+		assert(!unIntervaloMultiple.verifyAct());
+	}
 
 }

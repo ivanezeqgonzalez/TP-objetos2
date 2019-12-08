@@ -42,5 +42,13 @@ public class FPrecioMaxTestCase {
 		assert(filtro.aplicar(unaPublicacion));
 		verify(unaPublicacion).getPrecio();
 	}
+	@Test
+	public void testIsFilterFecha() {
+		assert(!filtro.isFilterFecha());
+	}
+	@Test
+	public void testIsFilterCiudad() {
+		assert(!filtro.isFilterCiudad());
+	}
 
 }

@@ -12,7 +12,6 @@ class HandlerInmuebleTest {
 
 	private HandlerInmueble handler;
 	private Inmueble mockInmueble ;
-	private TipoInmueble mockTipoInmueble;
 	private Propietario mockPropietario;
 	
 	@BeforeEach
@@ -21,7 +20,6 @@ class HandlerInmuebleTest {
 		this.handler = new HandlerInmueble();
 		this.mockInmueble = mock(Inmueble.class);
 		this.mockPropietario = mock(Propietario.class);
-		this.mockTipoInmueble = mock(TipoInmueble.class);
 	}
 	
 	@Test

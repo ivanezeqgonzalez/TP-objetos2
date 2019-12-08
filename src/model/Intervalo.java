@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.List;
 import java.util.*;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
@@ -46,7 +45,9 @@ public class Intervalo {
 		
 	}
 	public ArrayList<Interval> getIntervalos() {
-		// TODO Auto-generated method stub
 		return this.intervalos;
+	}
+	public Boolean verifyAct() {
+		return !this.intervalos.isEmpty();
 	}
 }

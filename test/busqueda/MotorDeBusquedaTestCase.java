@@ -31,6 +31,7 @@ public class MotorDeBusquedaTestCase {
 	public void setUp() throws Exception {
 		sistema  = mock(Sistema.class);
 		unBuscador = new MotorDeBusqueda();
+		unBuscador.setSistema(sistema);
 		unaPublicacion = mock(Publicacion.class);
 		publicacion2 = mock(Publicacion.class);
 		publicacion3 = mock(Publicacion.class);
@@ -52,17 +53,13 @@ public class MotorDeBusquedaTestCase {
 		unArrayDePublicaciones.add(publicacion3);
 	}
 	
-	@Test
-	public void testNoSePuedeRealizarBusquedaSinFiltros()  {
-		try {
-			unBuscador.buscarPublicaciones(unArrayDePublicaciones, new ArrayList<Filtro>());
-			fail("Se esperaba excepcion SinFiltrosObligatoriosException");
-		} catch(SinFiltrosObligatoriosException e) {}
+	@Test(expected = SinFiltrosObligatoriosException.class)
+	public void testNoSePuedeRealizarBusquedaSinFiltros() throws SinFiltrosObligatoriosException {
+	    unBuscador.buscarPublicaciones(new ArrayList<Filtro>());
 	}
-	
 	@Test(expected = SinFiltrosObligatoriosException.class)
 	public void testNoSePuedeRealizarBusquedaSinFiltrosObligatorios() throws SinFiltrosObligatoriosException {
-	    unBuscador.buscarPublicaciones(unArrayDePublicaciones, unArrayDeFiltrosNoBasicos);
+	    unBuscador.buscarPublicaciones(unArrayDeFiltrosNoBasicos);
 	}
 	
 	@Test
@@ -70,7 +67,7 @@ public class MotorDeBusquedaTestCase {
 		when(sistema.getAllPublicaciones()).thenReturn(new ArrayList<Publicacion>());
 		 
 		
-		ArrayList<Publicacion> publicaciones = unBuscador.buscarPublicaciones(unArrayDePublicaciones, unArrayDeFiltrosBasicos);
+		ArrayList<Publicacion> publicaciones = unBuscador.buscarPublicaciones(unArrayDeFiltrosBasicos);
 		
 		assert(publicaciones.isEmpty());
 	}
@@ -81,10 +78,10 @@ public class MotorDeBusquedaTestCase {
 		publicaciones.add(unaPublicacion);
 		when(unFiltroCiudad.aplicar(unaPublicacion)).thenReturn(true);
 		when(unFiltroFecha.aplicar(unaPublicacion)).thenReturn(false);
-		when(sistema.getAllPublicaciones()).thenReturn(publicaciones);
+		when(sistema.getPublicacionesActivas()).thenReturn(publicaciones);
 		
 		
-		publicaciones = unBuscador.buscarPublicaciones(publicaciones, unArrayDeFiltrosBasicos);
+		publicaciones = unBuscador.buscarPublicaciones(unArrayDeFiltrosBasicos);
 		
 		assert(publicaciones.size() == 0);
 	}
@@ -95,9 +92,9 @@ public class MotorDeBusquedaTestCase {
 		publicaciones.add(unaPublicacion);
 		when(unFiltroCiudad.aplicar(unaPublicacion)).thenReturn(true);
 		when(unFiltroFecha.aplicar(unaPublicacion)).thenReturn(true);
-		when(sistema.getAllPublicaciones()).thenReturn(publicaciones);
+		when(sistema.getPublicacionesActivas()).thenReturn(publicaciones);
 		
-		publicaciones = unBuscador.buscarPublicaciones(publicaciones, unArrayDeFiltrosBasicos);
+		publicaciones = unBuscador.buscarPublicaciones(unArrayDeFiltrosBasicos);
 		
 		assertEquals(publicaciones.size(), 1);
 		assert(publicaciones.contains(unaPublicacion));
@@ -115,7 +112,7 @@ public class MotorDeBusquedaTestCase {
 		when(unFiltroFecha.aplicar(publicacion3)).thenReturn(false);
 		when(sistema.getAllPublicaciones()).thenReturn(unArrayDePublicaciones);
 		
-		publicaciones = unBuscador.buscarPublicaciones(unArrayDePublicaciones, unArrayDeFiltrosBasicos);
+		publicaciones = unBuscador.buscarPublicaciones(unArrayDeFiltrosBasicos);
 		
 		assertEquals(publicaciones.size(), 0);
 	}
@@ -130,9 +127,9 @@ public class MotorDeBusquedaTestCase {
 		when(unFiltroFecha.aplicar(unaPublicacion)).thenReturn(true);
 		when(unFiltroFecha.aplicar(publicacion2)).thenReturn(false);
 		when(unFiltroFecha.aplicar(publicacion3)).thenReturn(false);
-		when(sistema.getAllPublicaciones()).thenReturn(unArrayDePublicaciones);
+		when(sistema.getPublicacionesActivas()).thenReturn(unArrayDePublicaciones);
 		
-		publicaciones = unBuscador.buscarPublicaciones(unArrayDePublicaciones, unArrayDeFiltrosBasicos);
+		publicaciones = unBuscador.buscarPublicaciones(unArrayDeFiltrosBasicos);
 		
 		assertEquals(publicaciones.size(), 1);
 		assert(publicaciones.contains(unaPublicacion));
@@ -148,9 +145,9 @@ public class MotorDeBusquedaTestCase {
 		when(unFiltroFecha.aplicar(unaPublicacion)).thenReturn(true);
 		when(unFiltroFecha.aplicar(publicacion2)).thenReturn(true);
 		when(unFiltroFecha.aplicar(publicacion3)).thenReturn(false);
-		when(sistema.getAllPublicaciones()).thenReturn(unArrayDePublicaciones);
+		when(sistema.getPublicacionesActivas()).thenReturn(unArrayDePublicaciones);
 		
-		publicaciones = unBuscador.buscarPublicaciones(unArrayDePublicaciones, unArrayDeFiltrosBasicos);
+		publicaciones = unBuscador.buscarPublicaciones(unArrayDeFiltrosBasicos);
 		
 		assertEquals(publicaciones.size(), 2);
 		assert(publicaciones.contains(unaPublicacion));
@@ -187,6 +184,12 @@ public class MotorDeBusquedaTestCase {
 		try {
 			unBuscador.verificarFiltrosObligatorios(unArrayDeFiltrosNoBasicos);
 			fail("Se esperaba excepcion SinFiltrosObligatoriosException");
+		} catch(SinFiltrosObligatoriosException e) {}
+	}
+	@Test
+	public void testVerificarFiltrosObligatoriosConFiltrosObligatorios() throws SinFiltrosObligatoriosException {
+		try {
+			unBuscador.verificarFiltrosObligatorios(unArrayDeFiltrosBasicos);
 		} catch(SinFiltrosObligatoriosException e) {}
 	}
 }

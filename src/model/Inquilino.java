@@ -5,22 +5,17 @@ import java.util.*;
 public class Inquilino extends Usuario /*implements ObserverInquilino*/ {
 	private ArrayList<Reserva> reservasAceptadas = new ArrayList<Reserva>();
 
-	Inquilino(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
+	Inquilino(String nombreCompleto, String eMail, int telefono, Sistema sistema) {
 		super(nombreCompleto, eMail, telefono, sistema);
 		this.ranking = 0;
 	}
-	
-	/*@Override
-	public void agregarReservaAceptada(Reserva reserva) {
-		this.sistema.agregarReservaPara(this, reserva);
-	}*/
-	
+		
 	public List <Reserva> getReservasActivas(){
-		return this.sistema.getReservasActivasDe(this);
+		return this.reservasAceptadas;
 	}
 	
-	public List <Reserva> getReservasPendientes(){
-		return this.sistema.getReservasPendientesDe(this);
+	public List<SolicitudReserva> getReservasPendientes(){
+		return this.sistema.getSolicitudesPendientesDe(this);
 	}
 
 }

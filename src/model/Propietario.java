@@ -4,7 +4,7 @@ import java.util.*;
 public class Propietario extends Usuario{
 
 	
-	public Propietario(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
+	public Propietario(String nombreCompleto, String eMail, int telefono, Sistema sistema) {
 		super(nombreCompleto, eMail, telefono, sistema);
 	}
 
@@ -12,16 +12,16 @@ public class Propietario extends Usuario{
 	
 	//RESERVAS
 	
-	public void aceptarReserva(Reserva reserva) {
-		this.sistema.registrarReservaDe(reserva, this);		
+	public void aceptarSolicitud(SolicitudReserva solicitud) {
+		this.sistema.concretarReserva(solicitud, this);		
 	}	
 	
-	public List<Reserva> getReservasPendientes() {
-		return this.sistema.getReservasPendientesDe(this);
+	public List<SolicitudReserva> getSolicitudesPendientes() {
+		return this.sistema.getSolicitudesPendientesDe(this);
 	}
 
-	public void removerSolicitudReserva(Reserva reserva) {
-		this.sistema.descartarSolicitud(reserva);
+	public void removerSolicitudReserva(SolicitudReserva solicitud) {
+		this.sistema.descartarSolicitud(solicitud);
 	}
 }
 

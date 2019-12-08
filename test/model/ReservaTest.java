@@ -19,8 +19,8 @@ class ReservaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		mockTipoInmueble = mock(TipoInmueble.class);
-		this.unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663", null);
-		this.unPropietario = new Propietario("Roman", "email", "155", null);
+		this.unInquilino = new Inquilino("Ivan Gonzalez", "email", 15663, null);
+		this.unPropietario = new Propietario("Roman", "email", 155, null);
 		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
 		this.checkin = DateTime.parse("01/01/2019", DateTimeFormat.forPattern("dd/MM/yyyy"));
 		this.checkout = DateTime.parse("20/01/2019", DateTimeFormat.forPattern("dd/MM/yyyy"));
@@ -55,5 +55,10 @@ class ReservaTest {
 	@Test
 	void getActiva() {
 		assertFalse(this.reserva.esActiva());
+	}
+	@Test
+	void testSetActiva() {
+		reserva.setActiva();
+		assert(reserva.esActiva());
 	}
 }

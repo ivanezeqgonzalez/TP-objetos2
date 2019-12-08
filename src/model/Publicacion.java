@@ -8,14 +8,17 @@ public class Publicacion {
 	private Inmueble inmueble;
 	private Intervalo intervalo;
 	private HandlerReserva handlerReserva;
-	private Propietario propietario;
+	private Boolean activa;
 
-	public Publicacion(HandlerReserva handlerReserva, Propietario propietario, Inmueble inm, DateTime in, DateTime out, Float precio) {
+	public Publicacion(Inmueble inm, DateTime in, DateTime out, Float precio) {
 		this.inmueble = inm;
 		this.intervalo = new Intervalo(in, out);
 		this.precio = precio;
-		this.handlerReserva = handlerReserva;
-		this.propietario = propietario;
+		this.activa = true;
+	}
+	
+	public void setHandlerReserva(HandlerReserva hr) {
+		this.handlerReserva = hr;
 	}
 
 	//GETTERS
@@ -29,7 +32,7 @@ public class Publicacion {
 		return this.inmueble.getCiudad();
 	}
 	public Propietario getPropietario() {
-		return this.propietario;
+		return this.inmueble.getPropietario();
 	}
 	
 	public Inmueble getInmueble() {
@@ -41,7 +44,7 @@ public class Publicacion {
 	public void reservar(Inquilino unInquilino, DateTime in, DateTime out) {		
 		
 		if (this.intervalo.estaDisponible(in, out)) {
-			handlerReserva.peticionReserva(new Reserva(unInquilino, this.inmueble, in, out));
+			handlerReserva.solicitudReserva(this, in, out, unInquilino);
 		}
 		
 	}
@@ -51,7 +54,13 @@ public class Publicacion {
 		
 	}
 
+	public Boolean esActiva() {
+		return this.activa;
+	}
 
-	
-
+	public Reserva concretarReserva(SolicitudReserva solicitudReserva) {
+		this.intervalo.restarIntervalo(solicitudReserva.getFechaInicio(), solicitudReserva.getFechaFin());
+		this.activa = this.intervalo.verifyAct();
+		return new Reserva(solicitudReserva.getInquilino(), this.inmueble, solicitudReserva.getFechaInicio(), solicitudReserva.getFechaFin());
+	}
 }

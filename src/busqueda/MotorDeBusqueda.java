@@ -5,15 +5,17 @@ import java.util.stream.Collectors;
 
 import exceptions.SinFiltrosObligatoriosException;
 import model.Publicacion;
+import model.Sistema;
 
 public class MotorDeBusqueda {
-	
-	public MotorDeBusqueda() {
-		
+	private Sistema sistema;
+
+	public void setSistema(Sistema sistema) {
+		this.sistema = sistema;
 	}
-	public ArrayList<Publicacion> buscarPublicaciones(ArrayList<Publicacion> publicaciones, ArrayList<Filtro> filtros) throws SinFiltrosObligatoriosException {
+	public ArrayList<Publicacion> buscarPublicaciones(ArrayList<Filtro> filtros) throws SinFiltrosObligatoriosException {
 		this.verificarFiltrosObligatorios(filtros);
-		return publicaciones.stream().filter(publicacion -> this.publicacionPasaFiltros(filtros, publicacion)).collect(Collectors.toCollection(ArrayList::new));
+		return this.sistema.getPublicacionesActivas().stream().filter(publicacion -> this.publicacionPasaFiltros(filtros, publicacion)).collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 	private boolean publicacionPasaFiltros(ArrayList<Filtro> filtros, Publicacion unaPublicacion) {
@@ -35,5 +37,6 @@ public class MotorDeBusqueda {
 	public boolean verifyFilterCiudad(ArrayList<Filtro> filtros) {
 		return filtros.stream().filter(filtro -> filtro.isFilterCiudad()).collect(Collectors.toCollection(ArrayList::new)).size() > 0;
 	}
+
 
 }

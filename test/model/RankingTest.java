@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 
 class RankingTest {
 
-	private Rankeable usuario;
+	private Usuario usuario;
 	private Rankeable inmueble;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		this.usuario = new Usuario ("nombre_usuario1", "email_usuario1", "tel_usuario1", null);
+		this.usuario = new Usuario ("nombre_usuario1", "email_usuario1", 41233, null);
 		this.inmueble = new Inmueble (null, "pais_inmueble", "ciudad_inmueble", "direccion_inmueble", 0, null); //tipo; desc; cant huespedes; dueño 
 	}
 
@@ -53,5 +53,21 @@ class RankingTest {
 		this.usuario.rankear(this.inmueble, 8);
 		//asserting
 		assertEquals(8, this.inmueble.getRanking());
+	}
+	
+	@Test
+	void testRankinConMasDe6Rankeos() {
+		this.usuario.rankearse(10);	
+		this.usuario.rankearse(10);	
+		this.usuario.rankearse(10);	
+		this.usuario.rankearse(10);	
+		this.usuario.rankearse(10);	
+		this.usuario.rankearse(10);	
+		this.usuario.rankearse(10);
+		assertEquals(10, this.usuario.getRanking());	
+	}
+	@Test
+	void testRankingSinRankeos() {
+		assertEquals(0, this.usuario.getRanking());	
 	}
 }

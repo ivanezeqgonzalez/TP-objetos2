@@ -5,10 +5,11 @@ public class Usuario implements Rankeable{
 	protected Sistema sistema;
 	protected String nombreCompleto;
 	protected String eMail;
-	protected String telefono;
-	protected int ranking, count;
+	protected int telefono;
+	protected int ranking;
+	protected int count;
 	
-	public Usuario(String nombreCompleto, String eMail, String telefono, Sistema sistema) {
+	public Usuario(String nombreCompleto, String eMail, int telefono, Sistema sistema) {
 		this.sistema = sistema;
 		this.nombreCompleto = nombreCompleto;
 		this.eMail = eMail;
@@ -24,11 +25,10 @@ public class Usuario implements Rankeable{
 	public String getEMail() {
 		return eMail;
 	}
-	public String getTelefono() {
+	public int getTelefono() {
 		return telefono;
 	}
 
-	
 	//RANKINGS
 	@Override
 	public void rankearse(int puntaje) {
@@ -50,7 +50,4 @@ public class Usuario implements Rankeable{
 		rankeable.rankearse(rank);
 		
 	}
-	
-	
-	
 }

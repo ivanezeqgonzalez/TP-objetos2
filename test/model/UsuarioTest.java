@@ -9,11 +9,11 @@ class UsuarioTest {
 	
 	@Test
 	void testCreacion() {
-		this.usuario = new Usuario ("Angelo Padron", "padron891@gmail.com", "42745404", null);
+		this.usuario = new Usuario ("Angelo Padron", "padron891@gmail.com", 42745404, null);
 		
 		assertEquals ("Angelo Padron", this.usuario.getNombreCompleto());
 		assertEquals ("padron891@gmail.com", this.usuario.getEMail());
-		assertEquals ("42745404", this.usuario.getTelefono());
+		assertEquals (42745404, this.usuario.getTelefono());
 		
 	}
 

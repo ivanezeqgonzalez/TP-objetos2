@@ -89,6 +89,10 @@ class InmuebleTest {
 		//asserting
 		assertEquals("nombre_usuario1", this.inmueble.getPropietario().getNombreCompleto());
 	}
+	@Test
+	void testRankingSinRankeo() {
+		assertEquals(0, inmueble.getRanking());
+	}
 	
 		
 

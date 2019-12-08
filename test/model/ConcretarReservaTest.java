@@ -3,6 +3,7 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,7 @@ class ConcretarReservaTest {
 	private HandlerReserva handlerReserva;
 	private TipoInmueble mockTipoInmueble;
 	private Sistema mockSistema;
+	private SolicitudReserva unaSolicitud;
 	
 	@BeforeEach
 	
@@ -29,15 +31,17 @@ class ConcretarReservaTest {
 		mockSistema = mock(Sistema.class);
 		handlerReserva = new HandlerReserva();
 		
-		unInquilino = new Inquilino("Ivan Gonzalez", "email", "15663", mockSistema);
-		unPropietario = new Propietario("Roman", "email", "155", mockSistema);
+		unInquilino = new Inquilino("Ivan Gonzalez", "email", 15663, mockSistema);
+		unPropietario = new Propietario("Roman", "email", 155, mockSistema);
 		unInmueble = new Inmueble(mockTipoInmueble, "Argentina", "Berazategui", "Calle 22", 5, unPropietario);
 		
 		this.checkin = DateTime.parse("03-11-2019", DateTimeFormat.forPattern("dd-MM-yyyy"));
 		this.checkout = DateTime.parse("07-11-2019", DateTimeFormat.forPattern("dd-MM-yyyy"));
 		
-		unaPublicacion = new Publicacion(handlerReserva, unPropietario, unInmueble, checkin, checkout, 250.f);
+		unaPublicacion = new Publicacion(unInmueble, checkin, checkout, 250.f);
+		unaPublicacion.setHandlerReserva(handlerReserva);
 		
+		unaSolicitud = mock(SolicitudReserva.class);
 		
 	}
 	
@@ -46,7 +50,7 @@ class ConcretarReservaTest {
 		
 		//Reserva pendiente
 		unaPublicacion.reservar(unInquilino, checkin, checkout);
-		List<Reserva> resultadoFiltro = handlerReserva.getReservasPendientes().stream().
+		List<SolicitudReserva> resultadoFiltro = handlerReserva.getSolicitudesPendientes().stream().
 				filter(r -> r.getInquilino() == unInquilino).collect(Collectors.toList());
 		
 		assertEquals(1, resultadoFiltro.size());
@@ -54,26 +58,34 @@ class ConcretarReservaTest {
 		//Reserva concretada
 		assertTrue(handlerReserva.getReservasActivas().isEmpty());
 		
-		Reserva reservaPendiente = resultadoFiltro.get(0);
-		unPropietario.aceptarReserva(reservaPendiente);
-		verify(mockSistema).registrarReservaDe(reservaPendiente, unPropietario);
+		SolicitudReserva solicitud = resultadoFiltro.get(0);
+		unPropietario.aceptarSolicitud(solicitud);
+		verify(mockSistema).concretarReserva(solicitud, unPropietario);
 	}
 	
 	@Test
-	void testAceptarReserva() {
-		Reserva mockReserva = mock(Reserva.class);
-		when(mockReserva.esActiva()).thenReturn(true);
-		handlerReserva.aceptarReserva(mockReserva);
+	void testAceptarSolicitudReservaDisponible() {
+		SolicitudReserva mockSolicitud = mock(SolicitudReserva.class);
+		when(mockSolicitud.sigueDisponible()).thenReturn(true);
+		handlerReserva.concretarSolicitud(mockSolicitud);
 		assertEquals(1, handlerReserva.getReservasActivas().size());
+	}
+	@Test
+	void testAceptarSolicitudReservaNoDisponible() {
+		SolicitudReserva mockSolicitud = mock(SolicitudReserva.class);
+		when(mockSolicitud.sigueDisponible()).thenReturn(false);
+		handlerReserva.concretarSolicitud(mockSolicitud);
+		assertEquals(0, handlerReserva.getReservasActivas().size());
 	}
 	
 	@Test
 	void testRemoverReserva() {
-		Reserva mockReserva = mock(Reserva.class);
-		handlerReserva.peticionReserva(mockReserva);
-		assertEquals(1, handlerReserva.getReservasPendientes().size());
-		handlerReserva.descartarSolicitud(mockReserva);
-		assertEquals(0, handlerReserva.getReservasPendientes().size());
+		ArrayList<SolicitudReserva> solicitudes = new ArrayList<SolicitudReserva>();
+		solicitudes.add(unaSolicitud);
+		handlerReserva.setSolicitudes(solicitudes);
+		assertEquals(1, handlerReserva.getSolicitudesPendientes().size());
+		handlerReserva.descartarSolicitud(unaSolicitud);
+		assertEquals(0, handlerReserva.getSolicitudesPendientes().size());
 	}
 }
 

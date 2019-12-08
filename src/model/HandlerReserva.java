@@ -1,36 +1,43 @@
 package model;
 
 import java.util.*;
-import java.util.stream.*;
+import org.joda.time.DateTime;
 
 public class HandlerReserva {
 	private List<Reserva> reservas;
+	private List<SolicitudReserva> solicitudes;
 	
 
 	HandlerReserva() {
-		this.reservas = new ArrayList<Reserva>();		
+		this.reservas = new ArrayList<Reserva>();
+		this.solicitudes = new ArrayList<SolicitudReserva>();	
 	}
 
+	public void setSolicitudes(List<SolicitudReserva> solicitudes) {
+		this.solicitudes = solicitudes;
+	}
 		
 	public List<Reserva> getReservasActivas() {
-		return this.reservas.stream().filter(r -> r.esActiva()).collect(Collectors.toList());
+		return this.reservas;
 	}
 
-	public List<Reserva> getReservasPendientes() {
-		return this.reservas.stream().filter(r -> ! r.esActiva()).collect(Collectors.toList());
+	public List<SolicitudReserva> getSolicitudesPendientes() {
+		return this.solicitudes;
 	}
 
-	public void aceptarReserva(Reserva reserva) {
-		reserva.setActiva();
-		this.reservas.add(reserva);		
+	public void concretarSolicitud(SolicitudReserva solicitud) {
+		if (solicitud.sigueDisponible()) {
+			this.reservas.add(solicitud.concretarReserva());
+		}
 	}
 	
-	public void peticionReserva(Reserva reserva) {
-		this.reservas.add(reserva);
+	public void solicitudReserva(Publicacion unaPublicacion, DateTime fi, DateTime ff, Inquilino unInquilino) {
+		this.solicitudes.add(new SolicitudReserva(unaPublicacion, fi, ff, unInquilino));
 	}
 
-	public void descartarSolicitud(Reserva reserva) {
-		this.reservas.remove(reserva);
+	public void descartarSolicitud(SolicitudReserva solicitud) {
+		this.solicitudes.remove(solicitud);
+		//notificar?
 		
 	}
 
