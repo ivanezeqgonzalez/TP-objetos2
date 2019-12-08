@@ -1,5 +1,6 @@
 package model;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,9 +16,8 @@ class InquilinoTest {
 	}
 
 	@Test
-	void testGetReservasActivasDelegaAsistema() {
-		unInquilino.getReservasActivas();
-		verify(unSistema, times(1)).getReservasActivasDe(unInquilino);
+	void testGetReservasActivas() {
+		assertEquals(0, unInquilino.getReservasActivas().size());
 	}
 	@Test
 	void testgetReservasPendientesDelegaAsistema() {
